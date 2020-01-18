@@ -1,0 +1,34 @@
+spring:
+  application:
+    name: bitcoin
+server:
+  port: 8006
+  ssl:
+    enabled: true
+    key-store: classpath:bitcoin.jks
+    key-store-password: bitcoin
+    key-alias: bitcoin
+    trust-store: classpath:bitcoin.jks
+    trust-store-password: bitcoin
+security:
+  require-ssl: true
+eureka:
+  instance:
+    hostname: localhost
+    prefer-ip-address: true
+    nonSecurePortEnabled: false
+    securePortEnabled: true
+    securePort: ${server.port}
+  client:
+    securePortEnabled: true
+    serviceUrl:
+      defaultZone: https://localhost:8761/eureka/
+# ribbon:
+#   IsSecured: true
+#   ConnectTimeout:  10000
+#   ReadTimeout:  10000
+#   eureka:
+#     enabled: true
+#   TrustStore: classpath:bitcoin.jks
+#   TrustStorePassword : bitcoin
+#   IsHostnameValidationRequired: false

@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: banka
+server:
+  port: 8004
+  ssl:
+    enabled: true
+    key-store: classpath:bank.jks
+    key-store-password: bank123
+    key-alias: bank
+    trust-store: classpath:bank.jks
+    trust-store-password: bank123
+security:
+  require-ssl: true
+eureka:
+  instance:
+    hostname: localhost
+    prefer-ip-address: true
+    nonSecurePortEnabled: false
+    securePortEnabled: true
+    securePort: ${server.port}
+  client:
+    # healthcheck:
+    #   enabled: true
+    securePortEnabled: true
+    lease:
+      duration: 5
+    serviceUrl:
+      defaultZone: https://localhost:8761/eureka/
+ribbon:
+  IsSecured: true
+  ConnectTimeout:  60000
+  ReadTimeout:  60000
+  eureka:
+    enabled: true
+  TrustStore: classpath:bank.jks
+  TrustStorePassword : bank123
+  IsHostnameValidationRequired: false
