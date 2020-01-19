@@ -19,29 +19,31 @@ public class BankaApplication {
 		SpringApplication.run(BankaApplication.class, args);
 	}
 
-	@Value("${server.ssl.key-store-password}")
-	private String keyStorePassword;
+	// @Value("${server.ssl.key-store-password}")
+	// private String keyStorePassword;
 
-	@Value("${server.ssl.trust-store-password}")
-	private String trustStorePassword;
+	// @Value("${server.ssl.trust-store-password}")
+	// private String trustStorePassword;
 
-	@Value("${spring.application.name}")
-	private String name;
+	// @Value("${spring.application.name}")
+	// private String name;
 
-	@Bean
-	public DiscoveryClientOptionalArgs discoveryClientOptionalArgs() throws NoSuchAlgorithmException {
-		DiscoveryClientOptionalArgs args = new DiscoveryClientOptionalArgs();
-		System.setProperty("javax.net.ssl.keyStore", "src/main/resources/bank.jks");
-		System.setProperty("javax.net.ssl.keyStorePassword", keyStorePassword);
-		System.setProperty("javax.net.ssl.trustStore", "src/main/resources/bank.jks");
-		System.setProperty("javax.net.ssl.trustStorePassword", trustStorePassword);
-		EurekaJerseyClientBuilder builder = new EurekaJerseyClientBuilder();
-		builder.withClientName(name);
-		builder.withSystemSSLConfiguration();
-		builder.withMaxTotalConnections(10000);
-		builder.withMaxConnectionsPerHost(10000);
-		args.setEurekaJerseyClient(builder.build());
-		return args;
-	}
+	// @Bean
+	// public DiscoveryClientOptionalArgs discoveryClientOptionalArgs() throws
+	// NoSuchAlgorithmException {
+	// DiscoveryClientOptionalArgs args = new DiscoveryClientOptionalArgs();
+	// System.setProperty("javax.net.ssl.keyStore", "src/main/resources/bank.jks");
+	// System.setProperty("javax.net.ssl.keyStorePassword", keyStorePassword);
+	// System.setProperty("javax.net.ssl.trustStore",
+	// "src/main/resources/bank.jks");
+	// System.setProperty("javax.net.ssl.trustStorePassword", trustStorePassword);
+	// EurekaJerseyClientBuilder builder = new EurekaJerseyClientBuilder();
+	// builder.withClientName(name);
+	// builder.withSystemSSLConfiguration();
+	// builder.withMaxTotalConnections(10000);
+	// builder.withMaxConnectionsPerHost(10000);
+	// args.setEurekaJerseyClient(builder.build());
+	// return args;
+	// }
 
 }

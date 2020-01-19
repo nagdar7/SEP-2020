@@ -3,26 +3,26 @@ spring:
     name: paypal
 server:
   port: 8007
-  ssl:
-    enabled: true
-    key-store: classpath:paypal.jks
-    key-store-password: paypal
-    key-alias: paypal
-    trust-store: classpath:paypal.jks
-    trust-store-password: paypal
-security:
-  require-ssl: true
+#   ssl:
+#     enabled: true
+#     key-store: classpath:paypal.jks
+#     key-store-password: paypal
+#     key-alias: paypal
+#     trust-store: classpath:paypal.jks
+#     trust-store-password: paypal
+# security:
+#   require-ssl: true
 eureka:
   instance:
     hostname: localhost
     prefer-ip-address: true
-    nonSecurePortEnabled: false
-    securePortEnabled: true
-    securePort: ${server.port}
+    # nonSecurePortEnabled: false
+    # securePortEnabled: true
+    # securePort: ${server.port}
   client:
-    securePortEnabled: true
+    # securePortEnabled: true
     serviceUrl:
-      defaultZone: https://localhost:8761/eureka/
+      defaultZone: http://localhost:8761/eureka/
 # ribbon:
 #   IsSecured: true
 #   ConnectTimeout:  10000

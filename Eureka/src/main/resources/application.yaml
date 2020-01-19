@@ -6,24 +6,24 @@ spring:
 # default port for eureka server
 server:
     port: 8761
-    ssl:
-      enabled: true
-      # client-auth: need
-      key-store: classpath:eureka.jks
-      key-store-password: eureka
-      key-alias: eureka
-      trust-store: classpath:eureka.jks
-      trust-store-password: eureka
+    # ssl:
+    #   enabled: true
+    #   # client-auth: need
+    #   key-store: classpath:eureka.jks
+    #   key-store-password: eureka
+    #   key-alias: eureka
+    #   trust-store: classpath:eureka.jks
+    #   trust-store-password: eureka
 
 # eureka by default will register itself as a client. So, we need to set it to false.
 # What's a client server? See other microservices (image, gallery, auth, etc).
 eureka:
   instance:
     hostname: localhost
-    securePort: ${server.port}
-    securePortEnabled: true
+    # securePort: ${server.port}
+    # securePortEnabled: true
     prefer-ip-address: true
-    nonSecurePortEnabled: false
+    # nonSecurePortEnabled: false
   client:
     registerWithEureka: false
     fetchRegistry: false

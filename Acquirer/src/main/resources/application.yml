@@ -3,13 +3,13 @@ spring:
     name: acquirer
 server:  
   port: 8005
-  ssl:
-    enabled: true
-    # client-auth: need
-    key-store: classpath:acquirer.jks
-    key-store-password: acquirer
-    key-alias: acquirer
-    trust-store: classpath:acquirer.jks
-    trust-store-password: acquirer
-security:
-  require-ssl: true
+#   ssl:
+#     enabled: true
+#     # client-auth: need
+#     key-store: classpath:acquirer.jks
+#     key-store-password: acquirer
+#     key-alias: acquirer
+#     trust-store: classpath:acquirer.jks
+#     trust-store-password: acquirer
+# security:
+#   require-ssl: true
