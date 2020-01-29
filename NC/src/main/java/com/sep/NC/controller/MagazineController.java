@@ -11,13 +11,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.client.RestTemplate;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @RestController
 @CrossOrigin
 public class MagazineController {
 
+    Logger logger = LoggerFactory.getLogger(this.getClass());
+
+
 	@RequestMapping(value = "api/getMagazines", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getAllDiseases() {
+    public ResponseEntity<?> getAllMagazines() {
         try {
             List<String> magazines = new ArrayList<String>();
             magazines.add("Casopis 1");
@@ -29,5 +38,16 @@ public class MagazineController {
             return new ResponseEntity<>("Invalid request", HttpStatus.BAD_REQUEST);
         }
     }
+
+
+	@RequestMapping(value = "/api/getPaymentMethods/{applicationName}", method = RequestMethod.GET,
+                    produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> getPaymentMethods(@PathVariable String applicationName) {
+		logger.debug("Get all payment methods");
+        System.out.println("Dosao sam do slanjaaaaaaa!");
+		RestTemplate restTemplate = new RestTemplate();
+		ResponseEntity<String> response = restTemplate.getForEntity("http://localhost:8765/api/getServices/"+applicationName, String.class);
+		return ResponseEntity.status(HttpStatus.OK).body(response);
+	}
 	
 }

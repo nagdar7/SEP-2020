@@ -4,28 +4,30 @@ spring:
 server:
     port: 8765
     ssl:
-      enabled: true
-      key-store: classpath:zuul.jks
-      key-store-password: zuul123
-      key-alias: zuul
-      trust-store: classpath:zuul.jks
-      trust-store-password: zuul123
+      #enabled: true
+      enabled: false
+      #key-store: classpath:zuul.jks
+      #key-store-password: zuul123
+      #key-alias: zuul
+      #trust-store: classpath:zuul.jks
+      #trust-store-password: zuul123
     #   client-auth: want
-security:
-    require-ssl: true
+#security:
+    #require-ssl: true
 eureka:
     instance:
         hostname: localhost
         preferIpAddress: true
-        nonSecurePortEnabled: false
-        securePortEnabled: true
-        securePort: ${server.port}
+        #nonSecurePortEnabled: false
+        #securePortEnabled: true
+        #securePort: ${server.port}
     client:
         registerWithEureka: false
         fetchRegistry: true
-        securePortEnabled: true
+        #securePortEnabled: true
         serviceUrl:
-            defaultZone: https://localhost:8761/eureka/
+            #defaultZone: https://localhost:8761/eureka/
+            defaultZone: http://localhost:8761/eureka/
 ribbon:
     OkToRetryOnAllOperations: true
     IsSecured: true

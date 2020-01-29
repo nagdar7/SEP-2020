@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NewMagazineService } from 'src/app/services/newMagazine.service';
 
 @Component({
   selector: 'app-new-magazine',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewMagazineComponent implements OnInit {
 
-  constructor() { }
+  services:any[];
+
+  constructor(
+    private newMagazineService: NewMagazineService
+  ) { }
 
   ngOnInit() {
+    this.newMagazineService.getPaymentUI().subscribe( res => {
+      console.log(res);
+    });
   }
 
 }
