@@ -3,6 +3,8 @@ package com.sep.PayPal.serviceImpl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.sep.PayPal.dto.UrlDTO;
+import com.sep.PayPal.model.FormField;
 import com.sep.PayPal.model.PayPal;
 import com.sep.PayPal.service.PayPalService;
 
@@ -22,5 +24,22 @@ public class PayPalServiceImpl implements PayPalService {
 		accounts.add(new PayPal(1L, "1456", "8527419685456", 60000.00, "Dragan", "Vujanovic"));
 		accounts.add(new PayPal(1L, "1598", "7418521265478", 90000.00, "Tatjana", "Zdravkovic"));
 		return accounts;
+	}
+
+	@Override
+	public String getPayPalUrl() {
+		return "localhost:4200/api/paypal";		
+	}
+
+	@Override
+	public List<FormField> getFormFieldsForPaypal() {
+		List<FormField> formFields = new  ArrayList<FormField>();
+		formFields.add(new FormField("field1", "int", true));
+		formFields.add(new FormField("field2", "string", true));
+		formFields.add(new FormField("field3", "string", true));
+		formFields.add(new FormField("field4", "string", false));
+		formFields.add(new FormField("field5", "string", false));
+		return formFields;
+
 	}
 }
