@@ -16,7 +16,7 @@
 	<properties>
 		<maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
 		<java.version>1.8</java.version>
-		<!-- <spring-cloud.version>Hoxton.RC2</spring-cloud.version> -->
+		<spring-cloud.version>Hoxton.RC2</spring-cloud.version>
 	</properties>
 
 	<dependencies>
@@ -58,11 +58,7 @@
 		</dependency>
 	</dependencies>
 
-<<<<<<< HEAD
 	<dependencyManagement>
-=======
-	<!-- <dependencyManagement>
->>>>>>> naucna-centrala
 		<dependencies>
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
@@ -72,11 +68,7 @@
 				<scope>import</scope>
 			</dependency>
 		</dependencies>
-<<<<<<< HEAD
 	</dependencyManagement>
-=======
-	</dependencyManagement> -->
->>>>>>> naucna-centrala
 
 	<build>
 		<plugins>

@@ -79,5 +79,16 @@ public class MagazineController {
                     seller, Seller.class);
         return new ResponseEntity<String>("success", HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/api/getPaymentTypesForMagazine/{pib}", method = RequestMethod.GET,
+                    produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> getPaymentTypesForMagazine(@PathVariable String pib) {
+		logger.debug("Get all payment methods");
+		RestTemplate restTemplate = new RestTemplate();
+		ResponseEntity<List<String>> response = restTemplate.exchange("http://localhost:8765/sellers/api/getPaymentTypes/"+pib,
+                    HttpMethod.GET, null, new ParameterizedTypeReference<List<String>>() {
+            });
+		return ResponseEntity.status(HttpStatus.OK).body(response.getBody());
+	}
 	
 }

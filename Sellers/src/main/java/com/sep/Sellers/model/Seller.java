@@ -54,6 +54,7 @@ public class Seller {
     }
 
     public Seller() {
+        this.paymentTypes = new ArrayList<String>();
     }
 
     public Seller(String name, String pib) {
