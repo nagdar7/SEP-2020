@@ -1,15 +1,14 @@
-package com.sep.Sellers.model;
+package com.sep.NC.model;
 
 import java.util.ArrayList;
 
 /**
  * Seller
  */
-public class Seller {
+public class Magazine {
 
     private String name;
     private String pib;
-    private ArrayList<String> paymentTypes;
 
     /**
      * @return String return the name
@@ -39,25 +38,11 @@ public class Seller {
         this.pib = pib;
     }
 
-    /**
-     * @return ArrayList<PaymentType> return the paymentTypes
-     */
-    public ArrayList<String> getPaymentTypes() {
-        return paymentTypes;
+    public Magazine() {
+
     }
 
-    /**
-     * @param paymentTypes the paymentTypes to set
-     */
-    public void setPaymentTypes(ArrayList<String> paymentTypes) {
-        this.paymentTypes = paymentTypes;
-    }
-
-    public Seller() {
-        this.paymentTypes = new ArrayList<String>();
-    }
-
-    public Seller(String name, String pib) {
+    public Magazine(String name, String pib) {
         this();
         this.name = name;
         this.pib = pib;

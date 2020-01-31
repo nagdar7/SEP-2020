@@ -25,5 +25,5 @@ eureka:
     prefer-ip-address: true
     # nonSecurePortEnabled: false
   client:
-    registerWithEureka: false
+    registerWithEureka: true
     fetchRegistry: false

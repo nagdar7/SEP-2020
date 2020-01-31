@@ -1,4 +1,4 @@
-package com.sep.Sellers.model;
+package com.sep.NC.model;
 
 import java.util.ArrayList;
 
@@ -54,7 +54,6 @@ public class Seller {
     }
 
     public Seller() {
-        this.paymentTypes = new ArrayList<String>();
     }
 
     public Seller(String name, String pib) {
