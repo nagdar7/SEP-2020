@@ -16,14 +16,10 @@
 	<properties>
 		<maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
 		<java.version>1.8</java.version>
-		<spring-cloud.version>Hoxton.RC2</spring-cloud.version>
+		<!-- <spring-cloud.version>Hoxton.RC2</spring-cloud.version> -->
 	</properties>
 
 	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
@@ -49,9 +45,24 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>5.2.3.RELEASE</version>
+		</dependency>
 	</dependencies>
 
+<<<<<<< HEAD
 	<dependencyManagement>
+=======
+	<!-- <dependencyManagement>
+>>>>>>> naucna-centrala
 		<dependencies>
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
@@ -61,13 +72,17 @@
 				<scope>import</scope>
 			</dependency>
 		</dependencies>
+<<<<<<< HEAD
 	</dependencyManagement>
+=======
+	</dependencyManagement> -->
+>>>>>>> naucna-centrala
 
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>

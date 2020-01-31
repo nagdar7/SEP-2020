@@ -1,3 +1,7 @@
-<p>
-  magazine works!
-</p>
+<div class="magazinesDiv">
+  <h2>Magazines ({{magazines.length}})</h2>
+  <ul class="list-group" *ngFor="let m of magazines">
+    <li class="list-group-item">{{m.name}}<button class="btn btn-info" style="float: right"
+      (click)="subscribe(m)">Subscribe</button></li>
+  </ul>
+</div>

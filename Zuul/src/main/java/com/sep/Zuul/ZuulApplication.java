@@ -25,6 +25,22 @@ import javax.net.ssl.SSLContext;
 
 import com.netflix.discovery.DiscoveryClient.DiscoveryClientOptionalArgs;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+
 @SpringBootApplication
 @EnableEurekaClient
 @EnableZuulProxy
@@ -83,4 +99,41 @@ public class ZuulApplication {
 	// HttpComponentsClientHttpRequestFactory(client)).build();
 	// }
 
+}
+
+@RestController
+@CrossOrigin
+class EurekaDiscoveryController {
+
+	// @Autowired
+	// private DiscoveryClient discoveryClient;
+
+	// @RequestMapping("/service-instances/{applicationName}")
+    // @RequestMapping(value = "api/service-instances/{applicationName}", method = RequestMethod.GET,
+    //         produces = MediaType.APPLICATION_JSON_VALUE)
+	// public ResponseEntity<String> serviceInstancesByApplicationName(
+	// 		@PathVariable String applicationName) {
+	// 			List<ServiceInstance> list = discoveryClient.getInstances("STORES");
+	// 			List<String> result = new ArrayList<String>();
+	// 			System.out.println(list.get(0).toString());
+	// 			if (list != null && list.size() > 0 ) {
+	// 				result.add("Nasao");
+	// 			}
+	// 			return new ResponseEntity<String>("nesto", HttpStatus.OK);
+	// 			// return result;
+	// 	// return this.discoveryClient.getInstances(applicationName);
+	// }
+
+	@RequestMapping(value = "/api/getServices/{applicationName}", method = RequestMethod.GET,
+                    produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> getPaymentMethods(@PathVariable String applicationName) {
+		// logger.debug("Get all services");
+        System.out.println("Dosao sam do slanjaaaaaaa!");
+		RestTemplate restTemplate = new RestTemplate();
+		//ResponseEntity<List<String>> response = restTemplate.getForObject("http://localhost:8761/api/service-instances/"+applicationName, new ParameterizedTypeReference<List<String>>());
+		ResponseEntity<List<String>> response = restTemplate.exchange("http://localhost:8761/api/service-instances/"+applicationName,
+                    HttpMethod.GET, null, new ParameterizedTypeReference<List<String>>() {
+            });
+		return ResponseEntity.status(HttpStatus.OK).body(response.getBody());
+	}
 }

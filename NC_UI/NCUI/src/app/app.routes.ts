@@ -13,11 +13,11 @@ const appRoutes : Routes =
     },
     {
       path : 'sviCasopisi',
-      component : NewMagazineComponent
+      component : MagazineComponent
     },
     {
       path : 'noviCasopis',
-      component : MagazineComponent
+      component : NewMagazineComponent
     },
 
   ];

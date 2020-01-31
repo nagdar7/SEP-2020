@@ -1,4 +1,4 @@
-package com.sep.Sellers.model;
+package com.sep.NC.model;
 
 import java.util.ArrayList;
 
