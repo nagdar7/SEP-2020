@@ -32,3 +32,5 @@ eureka:
 #   TrustStore: classpath:paypal.jks
 #   TrustStorePassword : paypal
 #   IsHostnameValidationRequired: false
+paypal:
+  access-token: A21AAF8N319okIBmgbMmCmUMZeAvoazmEGzTlpvHjTBxxRhS9Idg-QMRveygJnOVCHWBQk9db-KarZ37XObd24AHoRU76l89Q

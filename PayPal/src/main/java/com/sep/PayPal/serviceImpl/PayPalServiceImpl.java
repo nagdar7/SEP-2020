@@ -34,11 +34,8 @@ public class PayPalServiceImpl implements PayPalService {
 	@Override
 	public List<FormField> getFormFieldsForPaypal() {
 		List<FormField> formFields = new  ArrayList<FormField>();
-		formFields.add(new FormField("field1", "int", true));
-		formFields.add(new FormField("field2", "string", true));
-		formFields.add(new FormField("field3", "string", true));
-		formFields.add(new FormField("field4", "string", false));
-		formFields.add(new FormField("field5", "string", false));
+		formFields.add(new FormField("Total", "string", false));
+		formFields.add(new FormField("Currency", "string", false));
 		return formFields;
 
 	}

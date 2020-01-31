@@ -17,6 +17,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.sep.PayPal.dto.FormFieldsDTO;
 import com.sep.PayPal.dto.UrlDTO;
+import com.sep.PayPal.model.FormField;
 import com.sep.PayPal.model.PayPal;
 import com.sep.PayPal.service.PayPalService;
 
@@ -65,9 +66,10 @@ public class PayPalController {
     }
 	
 	 @RequestMapping(value = "/form-fields-for-payment-type", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	    public ResponseEntity<FormFieldsDTO> getFormFieldsForPaymentTypes() {
-		    FormFieldsDTO formFieldsForPaymentTypeDTO = new FormFieldsDTO(payPalService.getFormFieldsForPaypal());
-	        return new ResponseEntity<FormFieldsDTO>(formFieldsForPaymentTypeDTO, HttpStatus.OK);
+	    public ResponseEntity<List<FormField>> getFormFieldsForPaymentTypes() {
+		    List<FormField> formFieldsForPaymentTypeDTO = payPalService.getFormFieldsForPaypal();
+	        System.out.println("aaaaa");
+		    return new ResponseEntity<List<FormField>>(formFieldsForPaymentTypeDTO, HttpStatus.OK);
 	    }
 	
 }

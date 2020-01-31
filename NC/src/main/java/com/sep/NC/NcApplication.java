@@ -9,5 +9,4 @@ public class NCApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(NCApplication.class, args);
 	}
-
 }
