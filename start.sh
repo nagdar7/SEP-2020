@@ -11,6 +11,6 @@ for i in $listVar; do
         osascript -e "tell application \"Terminal\" to do script \"cd $SCRIPTPATH/$i && $SCRIPTPATH/$i/mvnw spring-boot:run\""
     fi
     if [[ "$OSTYPE" == "windows" ]]; then
-        terminal -e "cd $SCRIPTPATH/$i && $SCRIPTPATH/$i/mvnw spring-boot:run"
+        terminal -e "cd $SCRIPTPATH\\$i && $SCRIPTPATH\\$i\\mvnw.cmd spring-boot:run"
     fi
 done
