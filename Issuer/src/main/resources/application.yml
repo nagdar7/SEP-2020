@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: Issuer
+server:  
+  port: 8035
+#   ssl:
+#     enabled: true
+#     # client-auth: need
+#     key-store: classpath:issuerks
+#     key-store-password: issuer
+#     key-alias: issuer
+#     trust-store: classpath:issuerks
+#     trust-store-password: issuer
+# security:
+#   require-ssl: true

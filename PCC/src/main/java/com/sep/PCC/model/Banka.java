@@ -1,10 +1,4 @@
-package com.sep.Banka.model;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+package com.sep.PCC.model;
 
 public class Banka {
 
@@ -76,5 +70,4 @@ public class Banka {
 	public void setPrezime(String prezime) {
 		this.prezime = prezime;
 	}
-
 }

@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: pcc
+server:  
+  port: 8025
+#   ssl:
+#     enabled: true
+#     # client-auth: need
+#     key-store: classpath:pcc.jks
+#     key-store-password: pcc
+#     key-alias: pcc
+#     trust-store: classpath:pcc.jks
+#     trust-store-password: pcc
+# security:
+#   require-ssl: true

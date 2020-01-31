@@ -2,12 +2,12 @@ package com.sep.Acquirer.service;
 
 import java.util.List;
 
-import com.sep.Acquirer.model.Banka;
+import com.sep.Acquirer.model.PaymentRequest;
 
 import org.springframework.stereotype.Service;
 
 public interface AcquirerService {
 
-	public List<Banka> returnAllAccounts();
+	public List<PaymentRequest> returnAllAccounts();
 
 }
