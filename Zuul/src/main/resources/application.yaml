@@ -1,66 +1,73 @@
 spring:
     application:
-      name: zuul
+        name: zuul
 server:
     port: 8765
-    ssl:
-      #enabled: true
-      enabled: false
-      #key-store: classpath:zuul.jks
-      #key-store-password: zuul123
-      #key-alias: zuul
-      #trust-store: classpath:zuul.jks
-      #trust-store-password: zuul123
+    # ssl:
+    #     enabled: true
+    #     key-store: classpath:zuul.jks
+    #     key-store-password: zuul123
+    #     key-alias: zuul
+    #     trust-store: classpath:zuul.jks
+    #     trust-store-password: zuul123
     #   client-auth: want
-#security:
-    #require-ssl: true
+# security:
+#     require-ssl: true
 eureka:
     instance:
         hostname: localhost
         preferIpAddress: true
-        #nonSecurePortEnabled: false
-        #securePortEnabled: true
-        #securePort: ${server.port}
+        # nonSecurePortEnabled: false
+        # securePortEnabled: true
+        # securePort: ${server.port}
     client:
-        registerWithEureka: false
-        fetchRegistry: true
-        #securePortEnabled: true
+        # registerWithEureka: false
+        # fetchRegistry: true
+        # securePortEnabled: true
         serviceUrl:
-            #defaultZone: https://localhost:8761/eureka/
             defaultZone: http://localhost:8761/eureka/
-ribbon:
-    OkToRetryOnAllOperations: true
-    IsSecured: true
-    ConnectTimeout: 60000
-    ReadTimeout: 60000
-    MaxAutoRetries: 3
-    MaxAutoRetriesNextServer: 3
-    eureka:
-        enabled: true
-    TrustStore: classpath:zuul.jks
-    TrustStorePassword : zuul123
-    IsHostnameValidationRequired: false
-    CustomSSLSocketFactoryClassName: com.netflix.http4.ssl.AcceptAllSocketFactory
+# ribbon:
+#     OkToRetryOnAllOperations: true
+#     IsSecured: true
+#     ConnectTimeout: 60000
+#     ReadTimeout: 60000
+#     MaxAutoRetries: 3
+#     MaxAutoRetriesNextServer: 3
+#     eureka:
+#         enabled: true
+#     TrustStore: classpath:zuul.jks
+#     TrustStorePassword : zuul123
+#     IsHostnameValidationRequired: false
+#     CustomSSLSocketFactoryClassName: com.netflix.http4.ssl.AcceptAllSocketFactory
 zuul:
-    # ignored-headers: Access-Control-Allow-Credentials, Access-Control-Allow-Origin
+    ignored-headers: Access-Control-Allow-Credentials, Access-Control-Allow-Origin
     host:
         connect-timeout-millis: 10000
-        socket-timeout-millis: 30000
-    retryable: true
+        # socket-timeout-millis: 30000
+    # retryable: true
     sslHostnameValidationEnabled: false
-    cloud:
-        path: /**
+    # cloud:
+    #     path: /**
     # okhttp:
     #     enabled: true
     # routes.discovery:
     #     path: /discovery/**
     #     url: https://localhost:8761
-hystrix:
-    command:
-        default:
-            execution:
-                timeout:
-                    enabled: false
-                isolation:
-                    thread:
-                        timeoutInMilliseconds: 60000
+# hystrix:
+#     command:
+#         default:
+#             execution:
+#                 timeout:
+#                     enabled: false
+#                 isolation:
+#                     thread:
+#                         timeoutInMilliseconds: 60000
+# ribbon:
+#     IsSecured: true
+#     ConnectTimeout:  10000
+#     ReadTimeout:  10000
+#     eureka:
+#         enabled: true
+#     TrustStore: classpath:zuul.jks
+#     TrustStorePassword : zuul123
+#     IsHostnameValidationRequired: false

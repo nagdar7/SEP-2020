@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs/internal/Observable';
+import { Magazine } from 'src/app/model/magazine';
 
 
 const httpOptions = {
@@ -13,7 +15,7 @@ export class MagazineService {
   constructor(private http: HttpClient) {
   }
 
-  getAllMagazines(){
-    return this.http.get<string[]>("http://localhost:8080/api/getMagazines",{headers: this.headers, observe: 'response'});
+  getAllMagazines(): Observable<Magazine[]>{
+    return this.http.get<Magazine[]>("http://localhost:8080/api/getMagazines",{headers: this.headers});
   }
 }

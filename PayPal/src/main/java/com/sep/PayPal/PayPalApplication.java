@@ -29,19 +29,22 @@ public class PayPalApplication {
 	// private String name;
 
 	// @Bean
-	// public DiscoveryClientOptionalArgs discoveryClientOptionalArgs() throws NoSuchAlgorithmException {
-	// 	DiscoveryClientOptionalArgs args = new DiscoveryClientOptionalArgs();
-	// 	System.setProperty("javax.net.ssl.keyStore", "src/main/resources/paypal.jks");
-	// 	System.setProperty("javax.net.ssl.keyStorePassword", keyStorePassword);
-	// 	System.setProperty("javax.net.ssl.trustStore", "src/main/resources/paypal.jks");
-	// 	System.setProperty("javax.net.ssl.trustStorePassword", trustStorePassword);
-	// 	EurekaJerseyClientBuilder builder = new EurekaJerseyClientBuilder();
-	// 	builder.withClientName(name);
-	// 	builder.withSystemSSLConfiguration();
-	// 	builder.withMaxTotalConnections(10);
-	// 	builder.withMaxConnectionsPerHost(10);
-	// 	args.setEurekaJerseyClient(builder.build());
-	// 	return args;
+	// public DiscoveryClientOptionalArgs discoveryClientOptionalArgs() throws
+	// NoSuchAlgorithmException {
+	// DiscoveryClientOptionalArgs args = new DiscoveryClientOptionalArgs();
+	// System.setProperty("javax.net.ssl.keyStore",
+	// "src/main/resources/paypal.jks");
+	// System.setProperty("javax.net.ssl.keyStorePassword", keyStorePassword);
+	// System.setProperty("javax.net.ssl.trustStore",
+	// "src/main/resources/paypal.jks");
+	// System.setProperty("javax.net.ssl.trustStorePassword", trustStorePassword);
+	// EurekaJerseyClientBuilder builder = new EurekaJerseyClientBuilder();
+	// builder.withClientName(name);
+	// builder.withSystemSSLConfiguration();
+	// builder.withMaxTotalConnections(10);
+	// builder.withMaxConnectionsPerHost(10);
+	// args.setEurekaJerseyClient(builder.build());
+	// return args;
 	// }
 
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MagazineService } from 'src/app/services/magazine.service';
+import { Magazine } from 'src/app/model/magazine';
 
 @Component({
   selector: 'app-magazine',
@@ -8,17 +9,19 @@ import { MagazineService } from 'src/app/services/magazine.service';
 })
 export class MagazineComponent implements OnInit {
 
-  private magazines: string[];
+  private magazines: Magazine[] = [];
   constructor(private magazineService: MagazineService) { }
 
   ngOnInit() {
     this.magazineService.getAllMagazines().subscribe(
       data => {
-        this.magazines = data.body;
-        for (let i = 0 ; i < this.magazines.length; i++){
-          alert(this.magazines[i]);
-        }
+        this.magazines = data;
       });
+  }
+
+  subscribe(m : Magazine){
+    console.log("Pretplata na magazin: ");
+    console.log(m);
   }
 
 }
