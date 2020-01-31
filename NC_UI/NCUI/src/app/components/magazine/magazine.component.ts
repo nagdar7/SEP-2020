@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MagazineService } from 'src/app/services/magazine.service';
 import { Magazine } from 'src/app/model/magazine';
+import { FormField } from 'src/app/model/formField';
+import { PaymentService } from 'src/app/services/payment.service';
 
 @Component({
   selector: 'app-magazine',
@@ -12,8 +14,13 @@ export class MagazineComponent implements OnInit {
   private magazines: Magazine[] = [];
   private showPayments:boolean = false;
   private paymentsForMagazine:string[] = [];
+  private paymentChosen:boolean = false;
+  private formFields:FormField[] = [];
 
-  constructor(private magazineService: MagazineService) { }
+  constructor(
+    private magazineService: MagazineService,
+    private paymentService: PaymentService
+  ) { }
 
   ngOnInit() {
     this.magazineService.getAllMagazines().subscribe(
@@ -27,7 +34,7 @@ export class MagazineComponent implements OnInit {
     console.log(m);
     this.showPayments = true;
     this.magazineService.getAllPaymentTypes(m.pib).subscribe( res => {
-      console.log(res);
+      // console.log(res);
       this.paymentsForMagazine = res;
     });
   }
@@ -37,10 +44,12 @@ export class MagazineComponent implements OnInit {
   }
 
   pay(paymentType:string){
-    console.log(paymentType.toLowerCase());
-    // this.magazineService.pay(paymentType).subscribe(res => {
-    //   console.log(res);
-    // });
+    this.paymentChosen = true;
+    this.magazineService.pay(paymentType).subscribe(res => {
+      // console.log(res);
+      this.formFields = res;
+      this.paymentService.send(this.formFields);
+    });
   }
 
 }
