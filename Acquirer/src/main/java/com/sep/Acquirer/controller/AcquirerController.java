@@ -82,11 +82,11 @@ public class AcquirerController {
     public ResponseEntity<List<FormField>> getUIForForBuyer() throws IOException {
         logger.info("serve return form fields for ui");
         List<FormField> formFields = new ArrayList<>();
-        formFields.add(new FormField(0L, "PAN", "text", false));
-        formFields.add(new FormField(1L, "securityCode", "text", false));
-        formFields.add(new FormField(2L, "cardHolderName", "text", false));
-        formFields.add(new FormField(3L, "dateYear", "text", false));
-        formFields.add(new FormField(4L, "dateMonth", "text", false));
+        formFields.add(new FormField("pan", "Credit card number", "text", false));
+        formFields.add(new FormField("securityCode", "ccv2", "text", false));
+        formFields.add(new FormField("cardHolderName", "Cardholder Name", "text", false));
+        formFields.add(new FormField("expiryYear", "Year of expiry", "text", false));
+        formFields.add(new FormField("expiryMonth", "Month of expiry", "text", false));
         return new ResponseEntity<List<FormField>>(formFields, HttpStatus.OK);
     }
 

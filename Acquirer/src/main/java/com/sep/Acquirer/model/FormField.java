@@ -11,7 +11,7 @@ public class FormField {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
-    private Long id;
+    private String id;
 
     @Column(name = "name", unique = true, nullable = false)
     private String name;
@@ -25,18 +25,18 @@ public class FormField {
     public FormField() {
     }
 
-    public FormField(Long id, String name, String type, boolean optional) {
+    public FormField(String id, String name, String type, boolean optional) {
         this.id = id;
         this.name = name;
         this.type = type;
         this.optional = optional;
     }
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -68,7 +68,7 @@ public class FormField {
         this.optional = optional;
     }
 
-    public FormField id(Long id) {
+    public FormField id(String id) {
         this.id = id;
         return this;
     }
