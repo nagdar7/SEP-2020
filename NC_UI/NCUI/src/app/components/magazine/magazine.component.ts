@@ -16,6 +16,7 @@ export class MagazineComponent implements OnInit {
   private paymentsForMagazine:string[] = [];
   private paymentChosen:boolean = false;
   private formFields:FormField[] = [];
+  private paymentType:string = "";
 
   constructor(
     private magazineService: MagazineService,
@@ -44,6 +45,7 @@ export class MagazineComponent implements OnInit {
   }
 
   pay(paymentType:string){
+    this.paymentType = paymentType;
     this.paymentChosen = true;
     this.magazineService.paymentUI(paymentType).subscribe(res => {
       // console.log(res);

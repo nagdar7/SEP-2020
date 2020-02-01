@@ -13,6 +13,8 @@ import { MagazineService } from 'src/app/services/magazine.service';
 })
 export class PaymentComponent implements OnInit, OnDestroy {
 
+    @Input('instance') instance:string;
+
     private subscriptions: Subscription = new Subscription();
 
     private formFields: FormField[];
@@ -36,6 +38,7 @@ export class PaymentComponent implements OnInit, OnDestroy {
                 this.templates.push(t);
             }
         }));
+        // console.log("instancaaa: "+this.instance);
     }
 
     ngAfterViewChecked(){
@@ -55,7 +58,7 @@ export class PaymentComponent implements OnInit, OnDestroy {
         this.response.push({id: "failedUrl", value: "http://localhost:4200/paymentFailed"});
         this.response.push({id: "errorUrl", value: "http://localhost:4200/paymentError"});
         console.log(this.response);
-        this.magazineService.pay(this.response).subscribe( res => res);
+        this.magazineService.pay(this.response, this.instance).subscribe( res => res);
     }
 
 }
