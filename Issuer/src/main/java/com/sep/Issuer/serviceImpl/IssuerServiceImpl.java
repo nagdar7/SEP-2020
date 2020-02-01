@@ -3,13 +3,13 @@ package com.sep.Issuer.serviceImpl;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.sep.Issuerodel.Banka;
-import com.sep.Issuerervice.IsIssuerice;
+import com.sep.Issuer.model.Banka;
+import com.sep.Issuer.service.IssuerService;
 
 import org.springframework.stereotype.Service;
 
 @Service
-public class IssuerrviceImpl implements IsIssuerice {
+public class IssuerServiceImpl implements IssuerService {
 
 	@Override
 	public List<Banka> returnAllAccounts() {

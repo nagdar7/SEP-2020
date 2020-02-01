@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,6 +21,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.sep.Banka.mapper.BankAccountMapper;
+import com.sep.Banka.model.BankAccountDTO;
 import com.sep.Banka.model.FormField;
 import com.sep.Banka.model.PaymentModel;
 import com.sep.Banka.model.PaymentRequest;
@@ -52,14 +55,18 @@ public class PaymentController {
 		return ResponseEntity.status(response.getStatusCode()).body(response.getBody());
 	}
 
-	// @RequestMapping(path = "/pay", method = RequestMethod.POST)
-	// public ResponseEntity makePayment(@RequestBody PaymentRequest paymentRequest)
-	// {
-	// logger.info("makePayment, id: {}", paymentRequest.getMerchantOrderId());
-	// RestTemplate restTemplate = new RestTemplate();
-	// ResponseEntity<String> response = restTemplate.postForEntity(acquierUrl +
-	// "/api/aq", paymentRequest,
-	// String.class);
-	// return ResponseEntity.status(HttpStatus.OK).body(response);
-	// }
+	@RequestMapping(path = "/pay", method = RequestMethod.POST)
+	public RedirectView makePayment(@RequestBody BankAccountDTO bankAccountDTO) {
+		logger.info("makePayment");
+		ResponseEntity<String> response = new RestTemplate().postForEntity(acquierUrl + "/api/make-payment",
+				BankAccountMapper.toBankAccount(bankAccountDTO), String.class);
+		switch (response.getBody()) {
+		case "SUCCESS":
+			return new RedirectView(bankAccountDTO.getSuccessUrl());
+		case "FAIL":
+			return new RedirectView(bankAccountDTO.getFailedUrl());
+		default:
+			return new RedirectView(bankAccountDTO.getErrorUrl());
+		}
+	}
 }
