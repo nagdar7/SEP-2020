@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
@@ -28,6 +29,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.sep.Acquirer.model.BankAccount;
 import com.sep.Acquirer.model.FormField;
+import com.sep.Acquirer.model.PCCRequest;
 import com.sep.Acquirer.model.PaymentModel;
 import com.sep.Acquirer.model.PaymentRequest;
 import com.sep.Acquirer.service.AcquirerService;
@@ -35,6 +37,9 @@ import com.sep.Acquirer.service.AcquirerService;
 @RequestMapping("/api")
 @RestController
 public class AcquirerController {
+
+    @Value("${pcc.url}")
+    private String pccUrl;
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -91,20 +96,28 @@ public class AcquirerController {
     }
 
     @RequestMapping(value = "/make-payment", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public PaymentModel makePayment(@RequestBody BankAccount bankAccount) {
+    public ResponseEntity<String> makePayment(@RequestBody BankAccount bankAccount) {
         logger.info("makePayment");
-        // Date date = new Date();
-        // paymentRequest.setMerchantTimestamp(date);
-        PaymentModel p = new PaymentModel();
-        // p.setPaymentRequest(paymentRequest);
-        // MerchantAccount merchant =
-        // merchantAccountRep.findBymerchantId(paymentRequest.getMerchantId());
-
-        // p.setPaymentUrl("http://localhost:" +
-        // merchant.getClientAccount().getPortNumber() + "/#/paymentInput");
-        // paymentRequestRep.save(paymentRequest);
-        // paymentRep.save(p);
-        return p;
+        String responseMessage = "FAIL";
+        // if same bank
+        if (bankAccount.getPan().startsWith("1")) {
+            if (bankAccount.getPan().startsWith("11")) {
+                responseMessage = "SUCCESS";
+            } else if (bankAccount.getPan().startsWith("12")) {
+                responseMessage = "FAIL";
+            } else {
+                responseMessage = "CANCEL";
+            }
+        } else {
+            PCCRequest pccRequest = new PCCRequest();
+            pccRequest.setAcquirerTimestamp(new Date());
+            pccRequest.setBuyersPan(bankAccount.getPan());
+            pccRequest.setBankAccount(bankAccount);
+            ResponseEntity<String> response = new RestTemplate().postForEntity(pccUrl + "/api/pass-payment", pccRequest,
+                    String.class);
+            responseMessage = response.getBody();
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(responseMessage);
     }
 
 }

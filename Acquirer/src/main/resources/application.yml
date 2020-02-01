@@ -13,3 +13,6 @@ server:
 #     trust-store-password: acquirer
 # security:
 #   require-ssl: true
+
+pcc:
+  url: http://localhost:8025/

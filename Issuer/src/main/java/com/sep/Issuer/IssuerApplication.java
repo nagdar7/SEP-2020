@@ -6,10 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-public class Issuerplication {
+public class IssuerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Issuerplication.class, args);
+		SpringApplication.run(IssuerApplication.class, args);
 	}
 
 }

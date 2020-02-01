@@ -1,4 +1,4 @@
-package com.sep.Acquirer.model;
+package com.sep.Issuer.model;
 
 public class Banka {
 

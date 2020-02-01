@@ -13,3 +13,6 @@ server:
 #     trust-store-password: pcc
 # security:
 #   require-ssl: true
+
+issuer:
+  url: http://localhost:8035/
