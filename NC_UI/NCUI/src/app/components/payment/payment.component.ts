@@ -4,6 +4,7 @@ import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { PaymentService } from 'src/app/services/payment.service';
 import { Template } from 'src/app/model/template';
+import { MagazineService } from 'src/app/services/magazine.service';
 
 @Component({
   selector: 'app-payment',
@@ -21,6 +22,7 @@ export class PaymentComponent implements OnInit, OnDestroy {
 
     constructor(
         private paymentService: PaymentService,
+        private magazineService: MagazineService,
         private cdRef : ChangeDetectorRef
     ) { }
 
@@ -49,10 +51,11 @@ export class PaymentComponent implements OnInit, OnDestroy {
         for(let t of this.templates){
             this.response.push({id: t.id, value: t.value});
         }
-        this.response.push({id: "successUrl", value: "http://localhost:4200/"});
-        this.response.push({id: "failedUrl", value: "http://localhost:4200/"});
-        this.response.push({id: "errorUrl", value: "http://localhost:4200/"});
+        this.response.push({id: "successUrl", value: "http://localhost:4200//paymentSuccess"});
+        this.response.push({id: "failedUrl", value: "http://localhost:4200/paymentFailed"});
+        this.response.push({id: "errorUrl", value: "http://localhost:4200/paymentError"});
         console.log(this.response);
+        this.magazineService.pay(this.response).subscribe( res => res);
     }
 
 }
