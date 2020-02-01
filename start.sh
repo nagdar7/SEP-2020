@@ -2,7 +2,7 @@
 SCRIPT=`realpath ${BASH_SOURCE[0]}`
 SCRIPTPATH=`dirname $SCRIPT`    
 
-listVar="Eureka Zuul Sellers Banka Acquirer BitCoin PayPal NC"
+listVar="Banka Acquirer" # PCC Eureka Zuul Sellers Issuer BitCoin PayPal NC
 for i in $listVar; do
     if [[ "$OSTYPE" == "linux-gnu" ]]; then
         terminal -e cd $SCRIPTPATH/$i && $SCRIPTPATH/$i/mvnw spring-boot:run

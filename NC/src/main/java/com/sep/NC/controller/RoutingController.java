@@ -34,7 +34,6 @@ public class RoutingController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> GetSubscription(@PathVariable String subscription) {
         try {
-        	System.out.println(subscription);
             RestTemplate restTemplate = new RestTemplate();
             ResponseEntity<List<FormField>> response = restTemplate.exchange("http://localhost:8765/" + subscription + "/api/form-fields-for-payment-type",
                     HttpMethod.GET, null, new ParameterizedTypeReference<List<FormField>>() {

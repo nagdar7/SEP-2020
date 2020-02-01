@@ -7,10 +7,10 @@ import javax.persistence.Id;
 
 public class FormField {
 
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	// @Id
+    // @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
-    private Long id;
+    private String id;
 
     @Column(name = "name", unique = true, nullable = false)
     private String name;
@@ -21,11 +21,11 @@ public class FormField {
     @Column(name = "optional", unique = false, nullable = false)
     private boolean optional;
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -53,7 +53,7 @@ public class FormField {
 		super();
 	}
 
-	public FormField(Long id, String name, String type, boolean optional) {
+	public FormField(String id, String name, String type, boolean optional) {
 		super();
 		this.id = id;
 		this.name = name;

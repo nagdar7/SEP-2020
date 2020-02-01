@@ -38,4 +38,4 @@ eureka:
 #   IsHostnameValidationRequired: false
 
 acquier:
-  url: http://localhost:8005/
+  url: http://localhost:8015/

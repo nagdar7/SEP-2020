@@ -2,7 +2,7 @@ spring:
   application:
     name: acquirer
 server:  
-  port: 8005
+  port: 8015
 #   ssl:
 #     enabled: true
 #     # client-auth: need

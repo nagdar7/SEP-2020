@@ -1,13 +1,14 @@
-<div *ngIf="!this.showPayments" class="magazinesDiv">
+<div *ngIf="!this.showPayments && !this.paymentChosen" class="magazinesDiv">
   <h2>Magazines ({{magazines.length}})</h2>
   <ul class="list-group" *ngFor="let m of magazines">
     <li class="list-group-item">{{m.name}}<button class="btn btn-info" style="float: right"
       (click)="subscribe(m)">Subscribe</button></li>
   </ul>
 </div>
-<div *ngIf="this.showPayments" class="paymentTypesDiv">
+<div *ngIf="this.showPayments && !this.paymentChosen" class="paymentTypesDiv">
   <button class="btn btn-secondary" style="margin-bottom: 20px" (click)="back()">Back</button><h2>Chose payment type</h2>
   <div class="btn-group" role="group" *ngFor="let p of paymentsForMagazine">
     <button type="button" class="btn btn-dark" style="margin-right: 20px" (click)="pay(p)">{{p}}</button>
   </div>
 </div>
+<app-payment *ngIf="this.paymentChosen"></app-payment>
