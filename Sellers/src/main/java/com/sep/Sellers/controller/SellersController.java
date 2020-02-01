@@ -26,6 +26,18 @@ public class SellersController {
 
     public SellersController() {
         //allMagazines.add(new Magazine("Magazin 1", "256487"));
+        List<String> pt1 = new ArrayList<String>();
+		Seller s1 = new Seller("Magazin 1", "256487");
+		pt1.add("CREDITCARD");
+		pt1.add("PAYPAL");
+        s1.setPaymentTypes(pt1);
+        List<String> pt2 = new ArrayList<String>();
+		Seller s2 = new Seller("Magazin 2", "214365");
+		pt2.add("PAYPAL");
+		pt2.add("BITCOIN");
+        s2.setPaymentTypes(pt2);
+		allSellers.add(s1);
+		allSellers.add(s2);
     }
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -36,31 +48,34 @@ public class SellersController {
     @RequestMapping(value = "/sellers", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Seller>> getAllSellers() {
         logger.info("getting all sellers");
-        List<Seller> temp = sellersService.returnAllSellers();
-        for(Seller s: temp){
-            allSellers.add(s);
-        }
-        return new ResponseEntity<List<Seller>>(sellersService.returnAllSellers(), HttpStatus.OK);
+        // List<Seller> temp = sellersService.returnAllSellers();
+        // for(Seller s: temp){
+        //     allSellers.add(s);
+        // }
+        return new ResponseEntity<List<Seller>>(allSellers, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/insertSeller", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE,
-                    consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/insertSeller", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> insertSeller(@RequestBody Seller seller) {
         logger.info("insert new seller");
+        System.out.println(seller.getPaymentTypes().size());
+        System.out.println(seller.getPaymentTypes().get(0));
         allSellers.add(seller);
-        for(Seller s : allSellers){
-            System.out.println(s.toString());
-        }
+        // for(Seller s : allSellers){
+        //     System.out.println(s.toString());
+        // }
         return new ResponseEntity<Seller>(seller, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/getPaymentTypes/{pib}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<String>> getPaymentTypes(@PathVariable String pib) {
         logger.info("getting all payment types for magazine");
-        List<Seller> temp = sellersService.returnAllSellers();
-        System.out.println(temp.size());
+        // List<Seller> temp = sellersService.returnAllSellers();
+
+        System.out.println(allSellers.size());
         List<String> paymentTypes = new ArrayList<String>();
-        for(Seller s: temp){
+        for(Seller s: allSellers){
+            System.out.println(s.getPib());
             if(s.getPib().equals(pib)){
                 for(String t : s.getPaymentTypes()){
                     paymentTypes.add(t);
