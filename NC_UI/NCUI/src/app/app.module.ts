@@ -10,6 +10,9 @@ import { NewMagazineComponent } from './components/new-magazine/new-magazine.com
 import { MagazineComponent } from './components/magazine/magazine.component';
 import { HomeComponent } from './components/home/home.component';
 import { PaymentComponent } from './components/payment/payment.component';
+import { PaymentSuccessComponent } from './components/paymentSuccess/paymentSuccess.component';
+import { PaymentFailedComponent } from './components/paymentFailed/paymentFailed.component';
+import { PaymentErrorComponent } from './components/paymentError/paymentError.component';
 
 
 import { MagazineService } from './services/magazine.service';
@@ -24,7 +27,10 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
     NewMagazineComponent,
     MagazineComponent,
     HomeComponent,
-    PaymentComponent
+    PaymentComponent,
+    PaymentSuccessComponent,
+    PaymentFailedComponent,
+    PaymentErrorComponent
   ],
   imports: [
     BrowserModule,

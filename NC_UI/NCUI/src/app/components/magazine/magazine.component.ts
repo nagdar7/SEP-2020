@@ -45,7 +45,7 @@ export class MagazineComponent implements OnInit {
 
   pay(paymentType:string){
     this.paymentChosen = true;
-    this.magazineService.pay(paymentType).subscribe(res => {
+    this.magazineService.paymentUI(paymentType).subscribe(res => {
       // console.log(res);
       this.formFields = res;
       this.paymentService.send(this.formFields);

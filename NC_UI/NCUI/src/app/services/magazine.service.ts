@@ -24,7 +24,11 @@ export class MagazineService {
     return this.http.get<string[]>("http://localhost:8080/api/getPaymentTypesForMagazine/"+pib,{headers: this.headers});
   }
 
-  pay(paymentType:string):Observable<FormField[]>{
+  paymentUI(paymentType:string):Observable<FormField[]>{
     return this.http.get<FormField[]>("http://localhost:8080/api/payment-subscriptions/"+paymentType.toLowerCase(), {headers: this.headers});
+  }
+
+  pay(template:any[]):Observable<any>{
+    return this.http.post<any>("http://localhost:8080/api/pay",template, {headers: this.headers});
   }
 }
