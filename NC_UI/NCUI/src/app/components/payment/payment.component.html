@@ -1,0 +1,14 @@
+<div class="paymentDiv"  *ngIf="this.formFields !== undefined">
+    <div class="formDiv">
+        <form>
+            <div class="form-group" *ngFor="let f of this.formFields; let i = index">
+                <label for="{{f.id}}">{{f.name}}</label>
+                <input type="{{f.type}}" class="form-control" id="{{f.id}}" name="{{f.name}}"
+                [(ngModel)] = "this.templates[i].value">
+            </div>
+            <div class="text-right">
+                <button type="button" class="btn btn-info" (click)="submit()">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -2,6 +2,7 @@ package com.sep.PayPal.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.sep.PayPal.dto.FormFieldsDTO;
+import com.sep.PayPal.dto.RedirectDTO;
 import com.sep.PayPal.dto.UrlDTO;
 import com.sep.PayPal.model.FormField;
 import com.sep.PayPal.model.PayPal;
@@ -58,15 +60,18 @@ public class PayPalController {
 
     }
     
-	@RequestMapping(value = "/frontend-url", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE,
+	@RequestMapping(value = "/pay", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<UrlDTO> getFrontendUrl()
+	public ResponseEntity<RedirectDTO> Pay(@RequestBody Map<String, String> items)
     {
-		return new ResponseEntity<UrlDTO>(new UrlDTO(payPalService.getPayPalUrl()), HttpStatus.OK);
+		System.out.println("AAAAA");
+		System.out.println(items.size());
+		return ResponseEntity.status(HttpStatus.OK).body(payPalService.Pay(items));
     }
 	
 	 @RequestMapping(value = "/form-fields-for-payment-type", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	    public ResponseEntity<List<FormField>> getFormFieldsForPaymentTypes() {
+	        System.out.println("aaaaa");
 		    List<FormField> formFieldsForPaymentTypeDTO = payPalService.getFormFieldsForPaypal();
 	        System.out.println("aaaaa");
 		    return new ResponseEntity<List<FormField>>(formFieldsForPaymentTypeDTO, HttpStatus.OK);
