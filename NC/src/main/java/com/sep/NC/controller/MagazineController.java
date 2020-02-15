@@ -65,7 +65,7 @@ public class MagazineController {
     @RequestMapping(value = "/api/insertMagazine", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE,
                     consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Magazine> insertMagazine(@RequestBody Magazine magazine) {
-        logger.debug("insert new magazine");
+        logger.info("insert new magazine");
         allMagazines.add(magazine);
         return new ResponseEntity<Magazine>(magazine, HttpStatus.OK);
     }
@@ -73,9 +73,11 @@ public class MagazineController {
     @RequestMapping(value = "/api/addSeller", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE,
                     consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> insertMagazine(@RequestBody Seller seller) {
-        logger.debug("add new seller");
+        logger.info("add new seller");
+        System.out.println(seller.getPaymentTypes().size());
+        System.out.println(seller.getPaymentTypes().get(0));
         RestTemplate restTemplate = new RestTemplate();
-        Seller response = restTemplate.postForObject("http://localhost:8765/sellers/api/insertSeller",
+        ResponseEntity<Seller> response = restTemplate.postForEntity("http://localhost:8765/sellers/api/insertSeller",
                     seller, Seller.class);
         return new ResponseEntity<String>("success", HttpStatus.OK);
     }
@@ -83,7 +85,7 @@ public class MagazineController {
     @RequestMapping(value = "/api/getPaymentTypesForMagazine/{pib}", method = RequestMethod.GET,
                     produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> getPaymentTypesForMagazine(@PathVariable String pib) {
-		logger.debug("Get all payment methods");
+		logger.info("Get all payment methods");
 		RestTemplate restTemplate = new RestTemplate();
 		ResponseEntity<List<String>> response = restTemplate.exchange("http://localhost:8765/sellers/api/getPaymentTypes/"+pib,
                     HttpMethod.GET, null, new ParameterizedTypeReference<List<String>>() {

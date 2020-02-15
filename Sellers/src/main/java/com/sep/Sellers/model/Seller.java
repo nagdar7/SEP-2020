@@ -1,6 +1,7 @@
 package com.sep.Sellers.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Seller
@@ -9,7 +10,7 @@ public class Seller {
 
     private String name;
     private String pib;
-    private ArrayList<String> paymentTypes;
+    private List<String> paymentTypes;
 
     /**
      * @return String return the name
@@ -42,19 +43,19 @@ public class Seller {
     /**
      * @return ArrayList<PaymentType> return the paymentTypes
      */
-    public ArrayList<String> getPaymentTypes() {
+    public List<String> getPaymentTypes() {
         return paymentTypes;
     }
 
     /**
      * @param paymentTypes the paymentTypes to set
      */
-    public void setPaymentTypes(ArrayList<String> paymentTypes) {
+    public void setPaymentTypes(List<String> paymentTypes) {
         this.paymentTypes = paymentTypes;
     }
 
     public Seller() {
-        this.paymentTypes = new ArrayList<String>();
+        //this.paymentTypes = new ArrayList<String>();
     }
 
     public Seller(String name, String pib) {

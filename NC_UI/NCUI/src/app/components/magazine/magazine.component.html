@@ -11,4 +11,4 @@
     <button type="button" class="btn btn-dark" style="margin-right: 20px" (click)="pay(p)">{{p}}</button>
   </div>
 </div>
-<app-payment *ngIf="this.paymentChosen"></app-payment>
+<app-payment [instance]="paymentType" *ngIf="this.paymentChosen"></app-payment>

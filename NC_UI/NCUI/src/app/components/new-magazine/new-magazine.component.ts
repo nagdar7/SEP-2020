@@ -32,7 +32,7 @@ export class NewMagazineComponent implements OnInit {
     this.seller = new Seller();
     this.seller.name = this.magazine.name;
     this.seller.pib = this.magazine.pib;
-    this.seller.payments = this.temp;
+    this.seller.paymentTypes = this.temp;
     this.newMagazineService.insertNewMagazine(this.magazine).subscribe( res => {
       //console.log(res);
     });
