@@ -2,7 +2,7 @@ package com.sep.PayPal.dto;
 
 public class RedirectDTO {
 	public String RedirectUrl;
-	
+
 	public String Status;
 
 	public String getRedirectUrl() {
@@ -10,7 +10,7 @@ public class RedirectDTO {
 	}
 
 	public void setRedirectUrl(String redirectUrl) {
-		RedirectUrl = redirectUrl;
+		this.RedirectUrl = redirectUrl;
 	}
 
 	public String getStatus() {
@@ -18,10 +18,7 @@ public class RedirectDTO {
 	}
 
 	public void setStatus(String status) {
-		Status = status;
+		this.Status = status;
 	}
-	
-	
-	
-}
 
+}

@@ -1,8 +1,8 @@
 spring:
   application:
     name: bitcoin
-# server:
-#   port: 8006
+server:
+  port: 8006
 #   ssl:
 #     enabled: true
 #     key-store: classpath:bitcoin.jks
@@ -32,3 +32,7 @@ eureka:
 #   TrustStore: classpath:bitcoin.jks
 #   TrustStorePassword : bitcoin
 #   IsHostnameValidationRequired: false
+
+coingate:
+  url: https://api-sandbox.coingate.com/v2
+  token: guYqAtDARCitszy7qFTgqmRwKiHJWUSqbwLWy1u7

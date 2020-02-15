@@ -12,10 +12,10 @@ import { PaymentService } from 'src/app/services/payment.service';
 export class MagazineComponent implements OnInit {
 
   private magazines: Magazine[] = [];
-  private showPayments:boolean = false;
-  private paymentsForMagazine:string[] = [];
-  private paymentChosen:boolean = false;
-  private formFields:FormField[] = [];
+  private showPayments: boolean = false;
+  private paymentsForMagazine: string[] = [];
+  private paymentChosen: boolean = false;
+  private formFields: FormField[] = [];
 
   constructor(
     private magazineService: MagazineService,
@@ -29,22 +29,23 @@ export class MagazineComponent implements OnInit {
       });
   }
 
-  subscribe(m : Magazine){
+  subscribe(m: Magazine) {
     console.log("Pretplata na magazin: ");
     console.log(m);
     this.showPayments = true;
-    this.magazineService.getAllPaymentTypes(m.pib).subscribe( res => {
+    this.magazineService.getAllPaymentTypes(m.pib).subscribe(res => {
       // console.log(res);
       this.paymentsForMagazine = res;
     });
   }
 
-  back(){
+  back() {
     this.showPayments = false;
   }
 
-  pay(paymentType:string){
+  pay(paymentType: string) {
     this.paymentChosen = true;
+    localStorage.setItem("current-payment-type", paymentType)
     this.magazineService.paymentUI(paymentType).subscribe(res => {
       // console.log(res);
       this.formFields = res;

@@ -12,23 +12,23 @@ const httpOptions = {
 
 @Injectable()
 export class MagazineService {
-  private headers = new HttpHeaders({'Content-Type': 'application/json'});
+  private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
   constructor(private http: HttpClient) {
   }
 
-  getAllMagazines(): Observable<Magazine[]>{
-    return this.http.get<Magazine[]>("http://localhost:8080/api/getMagazines",{headers: this.headers});
+  getAllMagazines(): Observable<Magazine[]> {
+    return this.http.get<Magazine[]>("http://localhost:8080/api/getMagazines", { headers: this.headers });
   }
 
-  getAllPaymentTypes(pib: string): Observable<string[]>{
-    return this.http.get<string[]>("http://localhost:8080/api/getPaymentTypesForMagazine/"+pib,{headers: this.headers});
+  getAllPaymentTypes(pib: string): Observable<string[]> {
+    return this.http.get<string[]>("http://localhost:8080/api/getPaymentTypesForMagazine/" + pib, { headers: this.headers });
   }
 
-  paymentUI(paymentType:string):Observable<FormField[]>{
-    return this.http.get<FormField[]>("http://localhost:8080/api/payment-subscriptions/"+paymentType.toLowerCase(), {headers: this.headers});
+  paymentUI(paymentType: string): Observable<FormField[]> {
+    return this.http.get<FormField[]>("http://localhost:8080/api/payment-subscriptions/" + paymentType.toLowerCase(), { headers: this.headers });
   }
 
-  pay(template:any[]):Observable<any>{
-    return this.http.post<any>("http://localhost:8080/api/pay",template, {headers: this.headers});
+  pay(paymentType: string, template: any[]): any {
+    return this.http.post<string>("http://localhost:8080/api/payment-subscriptions/" + paymentType.toLowerCase(), template, { headers: this.headers });
   }
 }

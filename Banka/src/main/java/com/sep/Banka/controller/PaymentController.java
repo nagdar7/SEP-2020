@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import com.sep.Banka.mapper.BankAccountMapper;
 import com.sep.Banka.model.BankAccountDTO;
@@ -36,7 +37,7 @@ public class PaymentController {
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@RequestMapping(path = "/pay", method = RequestMethod.GET)
+	@RequestMapping(path = "/form-fields-for-payment-type", method = RequestMethod.GET)
 	public ResponseEntity<List<FormField>> getUIForForBuyer() throws IOException {
 		PaymentRequest paymentRequest = new PaymentRequest("", "", 0, new Date(), 0.0, "", "", "");
 		logger.info("get ui for pay, id: {}", paymentRequest.getMerchantOrderId());
@@ -56,17 +57,23 @@ public class PaymentController {
 	}
 
 	@RequestMapping(path = "/pay", method = RequestMethod.POST)
-	public RedirectView makePayment(@RequestBody BankAccountDTO bankAccountDTO) {
-		logger.info("makePayment");
+	public ResponseEntity<String> makePayment(@RequestBody Map<String, String> items) {
+		BankAccountDTO bankAccountDTO = new BankAccountDTO(items.get("pan"), items.get("securityCode"),
+				items.get("cardHolderName"), items.get("expiryYear"), items.get("expiryMonth"), items.get("successUrl"),
+				items.get("failedUrl"), items.get("errorUrl"));
+		logger.info("makePayment, bankAccountDTO: {}", bankAccountDTO);
 		ResponseEntity<String> response = new RestTemplate().postForEntity(acquierUrl + "/api/make-payment",
 				BankAccountMapper.toBankAccount(bankAccountDTO), String.class);
 		switch (response.getBody()) {
 		case "SUCCESS":
-			return new RedirectView(bankAccountDTO.getSuccessUrl());
+			logger.info("success, rediredt: {}", bankAccountDTO.getSuccessUrl());
+			return ResponseEntity.status(HttpStatus.OK).body(new String(bankAccountDTO.getSuccessUrl()));
 		case "FAIL":
-			return new RedirectView(bankAccountDTO.getFailedUrl());
+			logger.info("fail, redirect: {}", bankAccountDTO.getFailedUrl());
+			return ResponseEntity.status(HttpStatus.OK).body(new String(bankAccountDTO.getFailedUrl()));
 		default:
-			return new RedirectView(bankAccountDTO.getErrorUrl());
+			logger.info("error, redirect: {}", bankAccountDTO.getErrorUrl());
+			return ResponseEntity.status(HttpStatus.OK).body(new String(bankAccountDTO.getErrorUrl()));
 		}
 	}
 }

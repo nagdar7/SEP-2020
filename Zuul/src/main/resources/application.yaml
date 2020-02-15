@@ -62,9 +62,11 @@ zuul:
 #                 isolation:
 #                     thread:
 #                         timeoutInMilliseconds: 60000
+ribbon:
+    ConnectTimeout:  10000
+    ReadTimeout: 10000
 # ribbon:
 #     IsSecured: true
-#     ConnectTimeout:  10000
 #     ReadTimeout:  10000
 #     eureka:
 #         enabled: true

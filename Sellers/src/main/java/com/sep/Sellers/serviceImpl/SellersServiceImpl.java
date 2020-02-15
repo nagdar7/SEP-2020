@@ -16,7 +16,7 @@ public class SellersServiceImpl implements SellersService {
 		System.out.println("Usao sam u service");
 		List<Seller> sellers = new ArrayList<Seller>();
 		Seller s1 = new Seller("Magazin 1", "256487");
-		s1.getPaymentTypes().add("CREDITCARD");
+		s1.getPaymentTypes().add("BANKA");
 		s1.getPaymentTypes().add("PAYPAL");
 		Seller s2 = new Seller("Magazin 2", "214365");
 		s2.getPaymentTypes().add("PAYPAL");

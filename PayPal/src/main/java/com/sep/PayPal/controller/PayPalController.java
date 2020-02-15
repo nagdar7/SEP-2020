@@ -59,22 +59,23 @@ public class PayPalController {
         return ResponseEntity.status(HttpStatus.OK).body("Nema racuna");
 
     }
-    
-	@RequestMapping(value = "/pay", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
-			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<RedirectDTO> Pay(@RequestBody Map<String, String> items)
-    {
-		System.out.println("AAAAA");
-		System.out.println(items.size());
-		return ResponseEntity.status(HttpStatus.OK).body(payPalService.Pay(items));
+
+    @RequestMapping(path = "/pay", method = RequestMethod.POST)
+    public ResponseEntity<String> makePayment(@RequestBody Map<String, String> items) {
+        System.out.println("AAAAA");
+        System.out.println(items.size());
+        System.out.println(items);
+        RedirectDTO response = payPalService.Pay(items);
+        System.out.println(response.getRedirectUrl());
+        return ResponseEntity.status(HttpStatus.OK).body(new String(response.getRedirectUrl()));
     }
-	
-	 @RequestMapping(value = "/form-fields-for-payment-type", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	    public ResponseEntity<List<FormField>> getFormFieldsForPaymentTypes() {
-	        System.out.println("aaaaa");
-		    List<FormField> formFieldsForPaymentTypeDTO = payPalService.getFormFieldsForPaypal();
-	        System.out.println("aaaaa");
-		    return new ResponseEntity<List<FormField>>(formFieldsForPaymentTypeDTO, HttpStatus.OK);
-	    }
-	
+
+    @RequestMapping(value = "/form-fields-for-payment-type", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<FormField>> getFormFieldsForPaymentTypes() {
+        System.out.println("aaaaa");
+        List<FormField> formFieldsForPaymentTypeDTO = payPalService.getFormFieldsForPaypal();
+        System.out.println("aaaaa");
+        return new ResponseEntity<List<FormField>>(formFieldsForPaymentTypeDTO, HttpStatus.OK);
+    }
+
 }
