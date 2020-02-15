@@ -70,11 +70,20 @@ export class PaymentComponent implements OnInit, OnDestroy {
     console.log(this.response);
     var paymentType = localStorage.getItem("current-payment-type");
     // kids, don't try this at home:
-    // this.magazineService.pay(paymentType, this.response).subscribe(
-    //     res => { console.log(res); location.href = res; return res },
-    //     res => { console.log(res); location.href = res.error.text; return res });
-    this.magazineService
-      .pay(this.response, this.instance)
-      .subscribe(res => res);
+    this.magazineService.pay(this.response, this.instance).subscribe(
+      res => {
+        console.log(res);
+        location.href = res;
+        return res;
+      },
+      res => {
+        console.log(res);
+        location.href = res.error.text;
+        return res;
+      }
+    );
+    // this.magazineService
+    //   .pay(this.response, this.instance)
+    //   .subscribe(res => res);
   }
 }

@@ -23,10 +23,10 @@ eureka:
     # securePortEnabled: true
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
-# ribbon:
-#   IsSecured: true
-#   ConnectTimeout:  10000
-#   ReadTimeout:  10000
+ribbon:
+  #   IsSecured: true
+  ConnectTimeout: 10000
+  ReadTimeout: 10000
 #   eureka:
 #     enabled: true
 #   TrustStore: classpath:bitcoin.jks

@@ -32,33 +32,37 @@ public class PayPalController {
     @Autowired
     private PayPalService payPalService;
 
-    @RequestMapping(value = "/pay-pal", method = RequestMethod.POST)
-    public ResponseEntity Check(@RequestBody PayPal user) {
-        logger.debug("checkout payment passed by bank, id: {}, price: {}", user.getId(), user.getIznos());
-        List<PayPal> accounts = new ArrayList<>();
-        accounts = payPalService.returnAllAccounts();
+    // @RequestMapping(value = "/pay-pal", method = RequestMethod.POST)
+    // public ResponseEntity Check(@RequestBody PayPal user) {
+    // logger.debug("checkout payment passed by bank, id: {}, price: {}",
+    // user.getId(), user.getIznos());
+    // List<PayPal> accounts = new ArrayList<>();
+    // accounts = payPalService.returnAllAccounts();
 
-        if (accounts.size() > 0) {
-            for (int i = 0; i < accounts.size(); i++) {
-                if (accounts.get(i).getBrojKartice() == user.getBrojKartice()
-                        && accounts.get(i).getPin() == user.getPin()) {
-                    if (accounts.get(i).getIznos() >= user.getIznos()) {
-                        RestTemplate restTemplate = new RestTemplate();
-                        return ResponseEntity.status(HttpStatus.OK).body("Uspesna transakcija");
-                    } else {
-                        return ResponseEntity.status(HttpStatus.OK).body("Korisnik nema dovoljno novca na racunu!");
-                    }
-                } else {
-                    return ResponseEntity.status(HttpStatus.OK).body("Trazeni racun ne postoji!");
-                }
-            }
-        } else {
-            return ResponseEntity.status(HttpStatus.OK).body("Trazeni racun ne postojit!");
-        }
+    // if (accounts.size() > 0) {
+    // for (int i = 0; i < accounts.size(); i++) {
+    // if (accounts.get(i).getBrojKartice() == user.getBrojKartice()
+    // && accounts.get(i).getPin() == user.getPin()) {
+    // if (accounts.get(i).getIznos() >= user.getIznos()) {
+    // RestTemplate restTemplate = new RestTemplate();
+    // return ResponseEntity.status(HttpStatus.OK).body("Uspesna transakcija");
+    // } else {
+    // return ResponseEntity.status(HttpStatus.OK).body("Korisnik nema dovoljno
+    // novca na racunu!");
+    // }
+    // } else {
+    // return ResponseEntity.status(HttpStatus.OK).body("Trazeni racun ne
+    // postoji!");
+    // }
+    // }
+    // } else {
+    // return ResponseEntity.status(HttpStatus.OK).body("Trazeni racun ne
+    // postojit!");
+    // }
 
-        return ResponseEntity.status(HttpStatus.OK).body("Nema racuna");
+    // return ResponseEntity.status(HttpStatus.OK).body("Nema racuna");
 
-    }
+    // }
 
     @RequestMapping(path = "/pay", method = RequestMethod.POST)
     public ResponseEntity<String> makePayment(@RequestBody Map<String, String> items) {

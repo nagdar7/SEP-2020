@@ -38,8 +38,14 @@ export class MagazineService {
   //   return this.http.post<string>("http://localhost:8080/api/payment-subscriptions/" + paymentType.toLowerCase(), template, { headers: this.headers });
   pay(template: any[], paymentType: string): Observable<any> {
     //paymentType je tip palcanje paypal, banka itd
-    return this.http.post<any>("http://localhost:8080/api/pay", template, {
-      headers: this.headers
-    });
+    // return this.http.post<any>("http://localhost:8080/api/pay", template, {
+    // headers: this.headers
+    // });
+    return this.http.post<string>(
+      "http://localhost:8080/api/payment-subscriptions/" +
+        paymentType.toLowerCase(),
+      template,
+      { headers: this.headers }
+    );
   }
 }
