@@ -5,6 +5,7 @@ server:
   port: 8765
   ssl:
     enabled: true
+    protocol: TLS
     enabled-protocols: TLSv1.2
     #   # client-auth: need
     key-store: classpath:localhost.p12
@@ -16,29 +17,65 @@ server:
 eureka:
   instance:
     hostname: localhost
-    securePort: 8761
+    securePort: ${server.port}
     securePortEnabled: true
-    prefer-ip-address: true
+    # preferIpAddress: true
     nonSecurePortEnabled: false
-    statusPageUrl: https://${eureka.instance.hostName}:${eureka.instance.securePort}/info
-    healthCheckUrl: https://${eureka.instance.hostName}:${eureka.instance.securePort}/health
-    homePageUrl: https://${eureka.instance.hostname}:${eureka.instance.securePort}
+    # statusPageUrl: https://${eureka.instance.hostname}:${eureka.instance.securePort}/info
+    # healthCheckUrl: https://${eureka.instance.hostname}:${eureka.instance.securePort}/health
+    # homePageUrl: https://${eureka.instance.hostname}:${eureka.instance.securePort}
   client:
-    registerWithEureka: true
-    fetchRegistry: true
+    # registerWithEureka: true
+    # fetchRegistry: true
+    securePortEnabled: true
     serviceUrl:
-      defaultZone: https://${eureka.instance.hostname}:${eureka.instance.securePort}/eureka
+      defaultZone: https://${eureka.instance.hostname}:8761/eureka/
 
 zuul:
-  ignored-headers: Access-Control-Allow-Credentials, Access-Control-Allow-Origin
-  host:
-    connect-timeout-millis: 5000000
-    # socket-timeout-millis: 5000000
-  # retryable: true
-  sslHostnameValidationEnabled: false
+  # include-debug-header: true
+  # sslHostnameValidationEnabled: false
   # okhttp:
   #   enabled: true
+  host:
+    connect-timeout-millis: 500000
+    socket-timeout-millis: 500000
+  # ignored-headers: Access-Control-Allow-Credentials, Access-Control-Allow-Origin
+  # retryable: true
+  # ribbon:
+  #   eager-load:
+  #     enabled: true
+  # routes:
+  #   sellers:
+  #     path: /sellers/**
+  #     serviceId: sellers
+  #   banka:
+  #     path: /banka/**
+  #     serviceId: banka
+  #   paypal:
+  #     path: /paypal/**
+  #     serviceId: paypal
+  #   bitcoin:
+  #     path: /bitcoin/**
+  #     serviceId: bitcoin
+  # sensitive-headers:
 
 ribbon:
+  # OkToRetryOnAllOperations: true
   ReadTimeout: 10000
   ConnectTimeout: 10000
+  # IsSecure: true
+  # MaxAutoRetries: 1
+  # MaxAutoRetriesNextServer: 2
+  # CustomSSLSocketFactoryClassName: com.netflix.http4.ssl.AcceptAllSocketFactory
+  # IsHostnameValidationRequired: false
+  # TrustStore: classpath:zuul-keystore.jks
+  # TrustStorePassword : zuulpass
+  # eureka:
+  #   enabled: true
+
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 60000
+hystrix.command.gateway.execution.isolation.thread.timeoutInMilliseconds: 60000
+
+logging.level.com.netflix: DEBUG
+
+eureka-service-instances-url: https://localhost:8761/api/service-instances/

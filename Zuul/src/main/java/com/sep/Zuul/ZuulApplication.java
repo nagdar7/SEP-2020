@@ -109,31 +109,33 @@ class EurekaDiscoveryController {
 	// private DiscoveryClient discoveryClient;
 
 	// @RequestMapping("/service-instances/{applicationName}")
-    // @RequestMapping(value = "api/service-instances/{applicationName}", method = RequestMethod.GET,
-    //         produces = MediaType.APPLICATION_JSON_VALUE)
+	// @RequestMapping(value = "api/service-instances/{applicationName}", method =
+	// RequestMethod.GET,
+	// produces = MediaType.APPLICATION_JSON_VALUE)
 	// public ResponseEntity<String> serviceInstancesByApplicationName(
-	// 		@PathVariable String applicationName) {
-	// 			List<ServiceInstance> list = discoveryClient.getInstances("STORES");
-	// 			List<String> result = new ArrayList<String>();
-	// 			System.out.println(list.get(0).toString());
-	// 			if (list != null && list.size() > 0 ) {
-	// 				result.add("Nasao");
-	// 			}
-	// 			return new ResponseEntity<String>("nesto", HttpStatus.OK);
-	// 			// return result;
-	// 	// return this.discoveryClient.getInstances(applicationName);
+	// @PathVariable String applicationName) {
+	// List<ServiceInstance> list = discoveryClient.getInstances("STORES");
+	// List<String> result = new ArrayList<String>();
+	// System.out.println(list.get(0).toString());
+	// if (list != null && list.size() > 0 ) {
+	// result.add("Nasao");
+	// }
+	// return new ResponseEntity<String>("nesto", HttpStatus.OK);
+	// // return result;
+	// // return this.discoveryClient.getInstances(applicationName);
 	// }
 
-	@RequestMapping(value = "/api/getServices/{applicationName}", method = RequestMethod.GET,
-                    produces = MediaType.APPLICATION_JSON_VALUE)
+	@Value("${eureka-service-instances-url}")
+	String eurekaServiceInstancesUrl;
+
+	@RequestMapping(value = "/api/getServices/{applicationName}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> getPaymentMethods(@PathVariable String applicationName) {
 		// logger.debug("Get all services");
-        System.out.println("Dosao sam do slanjaaaaaaa!");
+		System.out.println("Dosao sam do slanjaaaaaaa!");
 		RestTemplate restTemplate = new RestTemplate();
-		//ResponseEntity<List<String>> response = restTemplate.getForObject("http://localhost:8761/api/service-instances/"+applicationName, new ParameterizedTypeReference<List<String>>());
-		ResponseEntity<List<String>> response = restTemplate.exchange("http://localhost:8761/api/service-instances/"+applicationName,
-                    HttpMethod.GET, null, new ParameterizedTypeReference<List<String>>() {
-            });
+		ResponseEntity<List<String>> response = restTemplate.exchange(eurekaServiceInstancesUrl + applicationName,
+				HttpMethod.GET, null, new ParameterizedTypeReference<List<String>>() {
+				});
 		return ResponseEntity.status(HttpStatus.OK).body(response.getBody());
 	}
 }

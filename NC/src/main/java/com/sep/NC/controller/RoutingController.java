@@ -31,12 +31,18 @@ import com.sep.NC.model.Seller;
 @CrossOrigin
 public class RoutingController {
 
+    @Value("${kp.url}")
+    String kpUrl;
+
+    @Value("${client.url}")
+    String clientUrl;
+
     @RequestMapping(value = "api/payment-subscriptions/{subscription}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> GetSubscription(@PathVariable String subscription) {
         try {
             RestTemplate restTemplate = new RestTemplate();
             ResponseEntity<List<FormField>> response = restTemplate.exchange(
-                    "http://localhost:8765/" + subscription + "/api/form-fields-for-payment-type", HttpMethod.GET, null,
+                    kpUrl + subscription + "/api/form-fields-for-payment-type", HttpMethod.GET, null,
                     new ParameterizedTypeReference<List<FormField>>() {
                     });
             return ResponseEntity.status(HttpStatus.OK).body(response.getBody());
@@ -53,14 +59,14 @@ public class RoutingController {
             // System.out.print(items.toString());
             Map<String, String> mapItems = items.stream().collect(Collectors.toMap(x -> x.getId(), x -> x.getValue()));
             System.out.println(mapItems.toString());
-            ResponseEntity<String> response = new RestTemplate()
-                    .postForEntity("http://localhost:8765/" + subscription + "/api/pay", mapItems, String.class);
+            ResponseEntity<String> response = new RestTemplate().postForEntity(kpUrl + subscription + "/api/pay",
+                    mapItems, String.class);
             System.out.println(response);
             return ResponseEntity.status(HttpStatus.OK).body(response.getBody());
 
         } catch (Exception ex) {
             ex.printStackTrace();
-            return ResponseEntity.status(HttpStatus.OK).body("http://localhost:4200/");
+            return ResponseEntity.status(HttpStatus.OK).body(clientUrl);
         }
     }
 }

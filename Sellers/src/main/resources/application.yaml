@@ -16,18 +16,19 @@ server:
 eureka:
   instance:
     hostname: localhost
-    securePort: 8761
+    securePort: ${server.port}
     securePortEnabled: true
-    prefer-ip-address: true
+    # preferIpAddress: true
     nonSecurePortEnabled: false
-    statusPageUrl: https://${eureka.instance.hostName}:${eureka.instance.securePort}/info
-    healthCheckUrl: https://${eureka.instance.hostName}:${eureka.instance.securePort}/health
-    homePageUrl: https://${eureka.instance.hostname}:${eureka.instance.securePort}
+    # statusPageUrl: https://${eureka.instance.hostname}:${eureka.instance.securePort}/info
+    # healthCheckUrl: https://${eureka.instance.hostname}:${eureka.instance.securePort}/health
+    # homePageUrl: https://${eureka.instance.hostname}:${eureka.instance.securePort}
   client:
     registerWithEureka: true
     fetchRegistry: false
+    securePortEnabled: true
     serviceUrl:
-      defaultZone: https://${eureka.instance.hostname}:${eureka.instance.securePort}/eureka
+      defaultZone: https://${eureka.instance.hostname}:8761/eureka/
 
 ribbon:
   ReadTimeout: 10000

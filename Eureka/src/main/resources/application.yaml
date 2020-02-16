@@ -8,6 +8,7 @@ server:
   port: 8761
   ssl:
     enabled: true
+    protocol: TLS
     enabled-protocols: TLSv1.2
     #   # client-auth: need
     key-store: classpath:localhost.p12
@@ -23,13 +24,15 @@ eureka:
     hostname: localhost
     securePort: ${server.port}
     securePortEnabled: true
-    prefer-ip-address: true
+    # preferIpAddress: true
     nonSecurePortEnabled: false
-    statusPageUrl: https://${eureka.instance.hostName}:${server.port}/info
-    healthCheckUrl: https://${eureka.instance.hostName}:${server.port}/health
-    homePageUrl: https://${eureka.instance.hostname}:${eureka.instance.securePort}
+    statusPageUrl: https://${eureka.instance.hostname}:${server.port}/info
+    healthCheckUrl: https://${eureka.instance.hostname}:${server.port}/health
+    homePageUrl: https://${eureka.instance.hostname}:${server.port}/
   client:
     registerWithEureka: true
-    fetchRegistry: false
+    fetchRegistry: true
+    # securePortEnabled: true
     serviceUrl:
-      defaultZone: https://${eureka.instance.hostname}:${eureka.instance.securePort}/eureka
+      defaultZone: https://${eureka.instance.hostname}:${server.port}/eureka/
+# logging.level.com.netflix: DEBUG

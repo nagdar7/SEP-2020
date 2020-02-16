@@ -1,3 +1,4 @@
+import { HOST_URL } from "./../../config";
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs/internal/Observable";
@@ -14,36 +15,34 @@ export class MagazineService {
   constructor(private http: HttpClient) {}
 
   getAllMagazines(): Observable<Magazine[]> {
-    return this.http.get<Magazine[]>("http://localhost:8080/api/getMagazines", {
+    return this.http.get<Magazine[]>(HOST_URL + "/api/getMagazines", {
       headers: this.headers
     });
   }
 
   getAllPaymentTypes(pib: string): Observable<string[]> {
     return this.http.get<string[]>(
-      "http://localhost:8080/api/getPaymentTypesForMagazine/" + pib,
+      HOST_URL + "/api/getPaymentTypesForMagazine/" + pib,
       { headers: this.headers }
     );
   }
 
   paymentUI(paymentType: string): Observable<FormField[]> {
     return this.http.get<FormField[]>(
-      "http://localhost:8080/api/payment-subscriptions/" +
-        paymentType.toLowerCase(),
+      HOST_URL + "/api/payment-subscriptions/" + paymentType.toLowerCase(),
       { headers: this.headers }
     );
   }
 
   // pay(paymentType: string, template: any[]): any {
-  //   return this.http.post<string>("http://localhost:8080/api/payment-subscriptions/" + paymentType.toLowerCase(), template, { headers: this.headers });
+  //   return this.http.post<string>(HOST_URL + "/api/payment-subscriptions/" + paymentType.toLowerCase(), template, { headers: this.headers });
   pay(template: any[], paymentType: string): Observable<any> {
     //paymentType je tip palcanje paypal, banka itd
-    // return this.http.post<any>("http://localhost:8080/api/pay", template, {
+    // return this.http.post<any>(HOST_URL + "/api/pay", template, {
     // headers: this.headers
     // });
     return this.http.post<string>(
-      "http://localhost:8080/api/payment-subscriptions/" +
-        paymentType.toLowerCase(),
+      HOST_URL + "/api/payment-subscriptions/" + paymentType.toLowerCase(),
       template,
       { headers: this.headers }
     );

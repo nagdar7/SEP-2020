@@ -31,6 +31,6 @@ ribbon:
   ConnectTimeout: 10000
 
 client:
-  url: http://localhost:4200/
+  url: https://localhost:4200/
 kp:
   url: https://localhost:8765/

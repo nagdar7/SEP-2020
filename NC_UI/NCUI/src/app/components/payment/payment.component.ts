@@ -1,3 +1,4 @@
+import { CLIENT_URL } from "./../../../config";
 import { Component, OnInit, Input, ChangeDetectorRef } from "@angular/core";
 import { FormField } from "src/app/model/formField";
 import { OnDestroy } from "@angular/core/src/metadata/lifecycle_hooks";
@@ -68,15 +69,15 @@ export class PaymentComponent implements OnInit {
     }
     this.response.push({
       id: "successUrl",
-      value: "http://localhost:4200/paymentSuccess"
+      value: CLIENT_URL + "/paymentSuccess"
     });
     this.response.push({
       id: "failedUrl",
-      value: "http://localhost:4200/paymentFailed"
+      value: CLIENT_URL + "/paymentFailed"
     });
     this.response.push({
       id: "errorUrl",
-      value: "http://localhost:4200/paymentError"
+      value: CLIENT_URL + "/paymentError"
     });
     console.log(this.response);
     var paymentType = localStorage.getItem("current-payment-type");
