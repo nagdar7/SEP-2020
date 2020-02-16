@@ -3,39 +3,35 @@ spring:
     name: paypal
 server:
   port: 8007
-#   ssl:
-#     enabled: true
-#     key-store: classpath:paypal.jks
-#     key-store-password: paypal
-#     key-alias: paypal
+  ssl:
+    enabled: true
+    enabled-protocols: TLSv1.2
+    #   # client-auth: need
+    key-store: classpath:localhost.p12
+    key-store-password: changeit
+    key-store-type: PKCS12
 #     trust-store: classpath:paypal.jks
 #     trust-store-password: paypal
-# security:
-#   require-ssl: true
+
 eureka:
   instance:
     hostname: localhost
+    securePort: 8761
+    securePortEnabled: true
     prefer-ip-address: true
-    # nonSecurePortEnabled: false
-    # securePortEnabled: true
-    # securePort: ${server.port}
+    nonSecurePortEnabled: false
+    statusPageUrl: https://${eureka.instance.hostName}:${eureka.instance.securePort}/info
+    healthCheckUrl: https://${eureka.instance.hostName}:${eureka.instance.securePort}/health
+    homePageUrl: https://${eureka.instance.hostname}:${eureka.instance.securePort}
   client:
-    # healthcheck:
-    #   enabled: true
-    # securePortEnabled: true
-    # lease:
-    #   duration: 5
-    # securePortEnabled: true
+    registerWithEureka: true
+    fetchRegistry: false
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: https://${eureka.instance.hostname}:${eureka.instance.securePort}/eureka
+
 ribbon:
-  #   IsSecured: true
-  ConnectTimeout:  10000
-  ReadTimeout:  10000
-#   eureka:
-#     enabled: true
-#   TrustStore: classpath:paypal.jks
-#   TrustStorePassword : paypal
-#   IsHostnameValidationRequired: false
+  ReadTimeout: 10000
+  ConnectTimeout: 10000
+
 paypal:
   access-token: A21AAF8N319okIBmgbMmCmUMZeAvoazmEGzTlpvHjTBxxRhS9Idg-QMRveygJnOVCHWBQk9db-KarZ37XObd24AHoRU76l89Q

@@ -1,75 +1,44 @@
 spring:
-    application:
-        name: zuul
+  application:
+    name: zuul
 server:
-    port: 8765
-    # ssl:
-    #     enabled: true
-    #     key-store: classpath:zuul.jks
-    #     key-store-password: zuul123
-    #     key-alias: zuul
-    #     trust-store: classpath:zuul.jks
-    #     trust-store-password: zuul123
-    #   client-auth: want
-# security:
-#     require-ssl: true
+  port: 8765
+  ssl:
+    enabled: true
+    enabled-protocols: TLSv1.2
+    #   # client-auth: need
+    key-store: classpath:localhost.p12
+    key-store-password: changeit
+    key-store-type: PKCS12
+  #     trust-store: classpath:zuul.jks
+  #     trust-store-password: zuul123
+
 eureka:
-    instance:
-        hostname: localhost
-        preferIpAddress: true
-        # nonSecurePortEnabled: false
-        # securePortEnabled: true
-        # securePort: ${server.port}
-    client:
-        # registerWithEureka: false
-        # fetchRegistry: true
-        # securePortEnabled: true
-        serviceUrl:
-            defaultZone: http://localhost:8761/eureka/
-# ribbon:
-#     OkToRetryOnAllOperations: true
-#     IsSecured: true
-#     ConnectTimeout: 60000
-#     ReadTimeout: 60000
-#     MaxAutoRetries: 3
-#     MaxAutoRetriesNextServer: 3
-#     eureka:
-#         enabled: true
-#     TrustStore: classpath:zuul.jks
-#     TrustStorePassword : zuul123
-#     IsHostnameValidationRequired: false
-#     CustomSSLSocketFactoryClassName: com.netflix.http4.ssl.AcceptAllSocketFactory
+  instance:
+    hostname: localhost
+    securePort: 8761
+    securePortEnabled: true
+    prefer-ip-address: true
+    nonSecurePortEnabled: false
+    statusPageUrl: https://${eureka.instance.hostName}:${eureka.instance.securePort}/info
+    healthCheckUrl: https://${eureka.instance.hostName}:${eureka.instance.securePort}/health
+    homePageUrl: https://${eureka.instance.hostname}:${eureka.instance.securePort}
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: https://${eureka.instance.hostname}:${eureka.instance.securePort}/eureka
+
 zuul:
-    ignored-headers: Access-Control-Allow-Credentials, Access-Control-Allow-Origin
-    host:
-        connect-timeout-millis: 10000
-        # socket-timeout-millis: 30000
-    # retryable: true
-    sslHostnameValidationEnabled: false
-    # cloud:
-    #     path: /**
-    # okhttp:
-    #     enabled: true
-    # routes.discovery:
-    #     path: /discovery/**
-    #     url: https://localhost:8761
-# hystrix:
-#     command:
-#         default:
-#             execution:
-#                 timeout:
-#                     enabled: false
-#                 isolation:
-#                     thread:
-#                         timeoutInMilliseconds: 60000
+  ignored-headers: Access-Control-Allow-Credentials, Access-Control-Allow-Origin
+  host:
+    connect-timeout-millis: 5000000
+    # socket-timeout-millis: 5000000
+  # retryable: true
+  sslHostnameValidationEnabled: false
+  # okhttp:
+  #   enabled: true
+
 ribbon:
-    ConnectTimeout:  10000
-    ReadTimeout: 10000
-# ribbon:
-#     IsSecured: true
-#     ReadTimeout:  10000
-#     eureka:
-#         enabled: true
-#     TrustStore: classpath:zuul.jks
-#     TrustStorePassword : zuul123
-#     IsHostnameValidationRequired: false
+  ReadTimeout: 10000
+  ConnectTimeout: 10000

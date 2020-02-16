@@ -1,18 +1,23 @@
 spring:
   application:
     name: pcc
-server:  
+server:
   port: 8025
-#   ssl:
-#     enabled: true
-#     # client-auth: need
-#     key-store: classpath:pcc.jks
-#     key-store-password: pcc
-#     key-alias: pcc
+  ssl:
+    enabled: true
+    enabled-protocols: TLSv1.2
+    #   # client-auth: need
+    key-store: classpath:localhost.p12
+    key-store-password: changeit
+    key-store-type: PKCS12
 #     trust-store: classpath:pcc.jks
 #     trust-store-password: pcc
 # security:
 #   require-ssl: true
 
+ribbon:
+  ReadTimeout: 10000
+  ConnectTimeout: 10000
+
 issuer:
-  url: http://localhost:8035/
+  url: https://localhost:8035/

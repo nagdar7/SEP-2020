@@ -1,15 +1,18 @@
 spring:
   application:
-    name: Issuer
-server:  
+    name: issuer
+server:
   port: 8035
-#   ssl:
-#     enabled: true
-#     # client-auth: need
-#     key-store: classpath:issuerks
-#     key-store-password: issuer
-#     key-alias: issuer
+  ssl:
+    enabled: true
+    enabled-protocols: TLSv1.2
+    #   # client-auth: need
+    key-store: classpath:localhost.p12
+    key-store-password: changeit
+    key-store-type: PKCS12
 #     trust-store: classpath:issuerks
 #     trust-store-password: issuer
-# security:
-#   require-ssl: true
+
+ribbon:
+  ReadTimeout: 10000
+  ConnectTimeout: 10000

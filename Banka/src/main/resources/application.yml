@@ -3,39 +3,35 @@ spring:
     name: banka
 server:
   port: 8004
-  # ssl:
-  #   enabled: true
-  #   key-store: classpath:bank.jks
-  #   key-store-password: bank123
-  #   key-alias: bank
+  ssl:
+    enabled: true
+    enabled-protocols: TLSv1.2
+    #   # client-auth: need
+    key-store: classpath:localhost.p12
+    key-store-password: changeit
+    key-store-type: PKCS12
   #   trust-store: classpath:bank.jks
   #   trust-store-password: bank123
-# security:
-#   require-ssl: true
+
 eureka:
   instance:
     hostname: localhost
+    securePort: 8761
+    securePortEnabled: true
     prefer-ip-address: true
-    # nonSecurePortEnabled: false
-    # securePortEnabled: true
-    # securePort: ${server.port}
+    nonSecurePortEnabled: false
+    statusPageUrl: https://${eureka.instance.hostName}:${eureka.instance.securePort}/info
+    healthCheckUrl: https://${eureka.instance.hostName}:${eureka.instance.securePort}/health
+    homePageUrl: https://${eureka.instance.hostname}:${eureka.instance.securePort}
   client:
-    # healthcheck:
-    #   enabled: true
-    # securePortEnabled: true
-    # lease:
-    #   duration: 5
+    registerWithEureka: true
+    fetchRegistry: false
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
-# ribbon:
-#   IsSecured: true
-#   ConnectTimeout:  60000
-#   ReadTimeout:  60000
-#   eureka:
-#     enabled: true
-#   TrustStore: classpath:bank.jks
-#   TrustStorePassword : bank123
-#   IsHostnameValidationRequired: false
+      defaultZone: https://${eureka.instance.hostname}:${eureka.instance.securePort}/eureka
+
+ribbon:
+  ReadTimeout: 10000
+  ConnectTimeout: 10000
 
 acquier:
-  url: http://localhost:8015/
+  url: https://localhost:8015/

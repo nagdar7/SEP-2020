@@ -3,35 +3,35 @@ spring:
     name: bitcoin
 server:
   port: 8006
-#   ssl:
-#     enabled: true
-#     key-store: classpath:bitcoin.jks
-#     key-store-password: bitcoin
-#     key-alias: bitcoin
+  ssl:
+    enabled: true
+    enabled-protocols: TLSv1.2
+    #   # client-auth: need
+    key-store: classpath:localhost.p12
+    key-store-password: changeit
+    key-store-type: PKCS12
 #     trust-store: classpath:bitcoin.jks
 #     trust-store-password: bitcoin
-# security:
-#   require-ssl: true
+
 eureka:
   instance:
     hostname: localhost
+    securePort: 8761
+    securePortEnabled: true
     prefer-ip-address: true
-    # nonSecurePortEnabled: false
-    # securePortEnabled: true
-    # securePort: ${server.port}
+    nonSecurePortEnabled: false
+    statusPageUrl: https://${eureka.instance.hostName}:${eureka.instance.securePort}/info
+    healthCheckUrl: https://${eureka.instance.hostName}:${eureka.instance.securePort}/health
+    homePageUrl: https://${eureka.instance.hostname}:${eureka.instance.securePort}
   client:
-    # securePortEnabled: true
+    registerWithEureka: true
+    fetchRegistry: false
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: https://${eureka.instance.hostname}:${eureka.instance.securePort}/eureka
+
 ribbon:
-  #   IsSecured: true
-  ConnectTimeout: 10000
   ReadTimeout: 10000
-#   eureka:
-#     enabled: true
-#   TrustStore: classpath:bitcoin.jks
-#   TrustStorePassword : bitcoin
-#   IsHostnameValidationRequired: false
+  ConnectTimeout: 10000
 
 coingate:
   url: https://api-sandbox.coingate.com/v2

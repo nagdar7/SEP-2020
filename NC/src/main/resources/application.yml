@@ -1,8 +1,19 @@
 spring:
   application:
-    name: acquirer
+    name: nc
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://localhost:3306/db_nc
+    username: root
+    password: root
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
+
 server:
-  port: 8015
+  port: 8080
   ssl:
     enabled: true
     enabled-protocols: TLSv1.2
@@ -19,5 +30,7 @@ ribbon:
   ReadTimeout: 10000
   ConnectTimeout: 10000
 
-pcc:
-  url: https://localhost:8025/
+client:
+  url: http://localhost:4200/
+kp:
+  url: https://localhost:8765/
