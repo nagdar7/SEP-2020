@@ -16,11 +16,11 @@ for i in $listVar; do
 done
 
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
-    terminal -e cd $SCRIPTPATH/NC_UI/NCUI && $SCRIPTPATH/NC_UI/NCUI/ng serve
+    terminal -e cd $SCRIPTPATH/NC_UI/NCUI && ng serve
 fi
 if [[ "$OSTYPE" == "darwin"* ]]; then
-    osascript -e "tell application \"Terminal\" to do script \"cd $SCRIPTPATH/NC_UI/NCUI && $SCRIPTPATH/NC_UI/NCUI/ng serve\""
+    osascript -e "tell application \"Terminal\" to do script \"cd $SCRIPTPATH/NC_UI/NCUI && ng serve\""
 fi
 if [[ "$OSTYPE" == "windows" ]]; then
-    terminal -e cd $SCRIPTPATH\\NC_UI\\NCUI && $SCRIPTPATH\\NC_UI\\NCUI\\ng serve
+    terminal -e cd $SCRIPTPATH\\NC_UI\\NCUI && ng serve
 fi
