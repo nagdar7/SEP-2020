@@ -5,50 +5,61 @@ import { Subscription } from "rxjs/internal/Subscription";
 import { PaymentService } from "src/app/services/payment.service";
 import { Template } from "src/app/model/template";
 import { MagazineService } from "src/app/services/magazine.service";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: "app-payment",
   templateUrl: "./payment.component.html",
   styleUrls: ["./payment.component.scss"]
 })
-export class PaymentComponent implements OnInit, OnDestroy {
+export class PaymentComponent implements OnInit {
   @Input("instance") instance: string;
 
-  private subscriptions: Subscription = new Subscription();
+  // private subscriptions: Subscription = new Subscription();
 
   private formFields: FormField[];
   private templates: Template[] = [];
   private dataAvailable: boolean = false;
   private response: any[] = [];
+  magazineId;
+  paymentType;
 
   constructor(
     private paymentService: PaymentService,
     private magazineService: MagazineService,
-    private cdRef: ChangeDetectorRef
+    private cdRef: ChangeDetectorRef,
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit() {
-    this.subscriptions.add(
-      this.paymentService.send$.subscribe(res => {
-        this.formFields = res;
-        for (let f of this.formFields) {
-          var t = new Template();
-          t.id = f.id;
-          t.value = "";
-          this.templates.push(t);
-        }
-      })
-    );
-    // console.log("instancaaa: "+this.instance);
+    this.magazineId = this.route.snapshot.params["magazineId"];
+    this.paymentType = this.route.snapshot.params["paymentType"];
+    this.magazineService.paymentUI(this.paymentType).subscribe(res => {
+      // console.log(res);
+      this.formFields = res;
+      // this.paymentService.send(this.formFields);
+      this.formFields = res;
+      for (let f of this.formFields) {
+        var t = new Template();
+        t.id = f.id;
+        t.value = "";
+        this.templates.push(t);
+      }
+    });
   }
 
-  ngAfterViewChecked() {
-    this.dataAvailable = true;
-    this.cdRef.detectChanges();
-  }
+  // ngAfterViewChecked() {
+  //   this.dataAvailable = true;
+  //   this.cdRef.detectChanges();
+  // }
 
-  ngOnDestroy(): void {
-    this.subscriptions.unsubscribe();
+  // ngOnDestroy(): void {
+  //   this.subscriptions.unsubscribe();
+  // }
+
+  back() {
+    this.router.navigate(["/magazine/" + this.magazineId]);
   }
 
   submit() {

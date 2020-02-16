@@ -1,3 +1,4 @@
+import { MagazineSubscribeComponent } from "./components/magazine-subscribe/magazine-subscribe.component";
 import { RegistrationComponent } from "./components/registration/registration.component";
 import { LoginComponent } from "./components/login/login.component";
 import { Notauthorized } from "./guard/notauthorized.guard";
@@ -38,6 +39,7 @@ import { Author } from "./guard/author.guard";
     AppComponent,
     NewMagazineComponent,
     MagazineComponent,
+    MagazineSubscribeComponent,
     HomeComponent,
     PaymentComponent,
     PaymentSuccessComponent,

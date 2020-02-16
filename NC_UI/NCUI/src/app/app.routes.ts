@@ -1,3 +1,5 @@
+import { PaymentComponent } from "./components/payment/payment.component";
+import { MagazineSubscribeComponent } from "./components/magazine-subscribe/magazine-subscribe.component";
 import { Authorized } from "./guard/authorized.guard";
 import { LoginComponent } from "./components/login/login.component";
 import { Notauthorized } from "./guard/notauthorized.guard";
@@ -17,8 +19,18 @@ const appRoutes: Routes = [
     component: HomeComponent
   },
   {
-    path: "sviCasopisi",
+    path: "magazine",
     component: MagazineComponent,
+    canActivate: [Authorized]
+  },
+  {
+    path: "magazine/:magazineId",
+    component: MagazineSubscribeComponent,
+    canActivate: [Authorized]
+  },
+  {
+    path: "magazine/:magazineId/pay/:paymentType",
+    component: PaymentComponent,
     canActivate: [Authorized]
   },
   {

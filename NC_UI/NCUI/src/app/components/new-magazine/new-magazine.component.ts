@@ -36,7 +36,7 @@ export class NewMagazineComponent implements OnInit {
     this.seller.paymentTypes = this.temp;
     this.newMagazineService.insertNewMagazine(this.magazine).subscribe(res => {
       console.log(res);
-      this.router.navigate(["/sviCasopisi"]);
+      this.router.navigate(["/magazine"]);
     });
     this.newMagazineService.insertSeller(this.seller).subscribe(result => {
       console.log(result);
