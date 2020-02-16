@@ -1,51 +1,64 @@
 package com.sep.NC.model;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
-/**
- * Seller
- */
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sep.NC.model.enumeration.BillingType;
+import com.sep.NC.model.enumeration.ScienceField;
+
+@ToString
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
 public class Magazine {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "magazine_id")
+    private Long id;
+
+    @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false)
     private String pib;
 
-    /**
-     * @return String return the name
-     */
-    public String getName() {
-        return name;
-    }
+    @Column(unique = true)
+    private String issn;
 
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
+    @Column(nullable = false)
+    private Boolean active;
 
-    /**
-     * @return String return the pib
-     */
-    public String getPib() {
-        return pib;
-    }
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private BillingType billingType;
 
-    /**
-     * @param pib the pib to set
-     */
-    public void setPib(String pib) {
-        this.pib = pib;
-    }
+    @ElementCollection(targetClass = ScienceField.class)
+    @JoinTable(name = "magazine_science_fields", joinColumns = @JoinColumn(name = "magazine_id"))
+    @Column(name = "science_fields", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Collection<ScienceField> scienceFieldList;
 
-    public Magazine() {
+    // @JsonIgnore
+    // @OneToOne
+    // private ScientificCommittee scientificCommittee;
 
-    }
+    @OneToMany(mappedBy = "reviewingMagazines", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+    private List<Account> reviewers;
 
-    public Magazine(String name, String pib) {
-        this();
-        this.name = name;
-        this.pib = pib;
-    }
-
+    @ManyToMany
+    @JoinTable(name = "open_access_authors", joinColumns = @JoinColumn(name = "magazine_id"), inverseJoinColumns = @JoinColumn(name = "account_id"))
+    private List<Account> openAccessAuthors;
 }
