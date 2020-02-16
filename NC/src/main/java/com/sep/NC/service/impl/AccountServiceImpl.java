@@ -4,6 +4,8 @@ import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.sep.NC.dto.AccountDTO;
@@ -23,6 +25,9 @@ import com.sep.NC.repository.AuthorityRepository;
 public class AccountServiceImpl implements AccountService {
 
     Logger log = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private AccountRepository accountRepository;
@@ -75,6 +80,8 @@ public class AccountServiceImpl implements AccountService {
         ModelMapper modelMapper = new ModelMapper();
         Account account = modelMapper.map(accountDTO, Account.class);
         account.setActive(true);
+        account.setReviewer(false);
+        account.setPassword(passwordEncoder.encode(accountDTO.getPassword()));
         Set<Authority> authorities = new HashSet<>();
         authorities.add(new Authority("AUTHOR"));
         account.setAuthorities(authorities);

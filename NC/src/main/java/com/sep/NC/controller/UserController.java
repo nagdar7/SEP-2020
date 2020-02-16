@@ -71,8 +71,7 @@ public class UserController {
     }
 
     @PostMapping(path = "/registration", produces = "application/json")
-    public @ResponseBody ResponseEntity<AccountDTO> registration(@RequestBody AccountDTO accountDTO,
-            @PathVariable String taskId) throws Exception {
+    public @ResponseBody ResponseEntity<AccountDTO> registration(@RequestBody AccountDTO accountDTO) throws Exception {
         log.info("postFormSubmission, dto username: {}", accountDTO.getUsername());
         accountDTO = accountService.createNewAccount(accountDTO);
         return new ResponseEntity<>(HttpStatus.OK);
