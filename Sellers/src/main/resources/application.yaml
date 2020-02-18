@@ -1,6 +1,18 @@
 spring:
   application:
     name: sellers
+  datasource:
+    url: jdbc:mysql://localhost:3306/db_nc?createDatabaseIfNotExist=true
+    username: root
+    password: tanja
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
+
 server:
   port: 8003
   ssl:

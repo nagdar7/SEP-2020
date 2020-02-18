@@ -6,5 +6,6 @@ import com.sep.Sellers.model.Seller;
 
 public interface SellersService {
 
-    public List<Seller> returnAllSellers();
+//    public List<Seller> returnAllSellers();
+    List<Seller> findAll();
 }
